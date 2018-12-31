@@ -48,9 +48,13 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
     width: auto;
 }
 
+.meal-bar label {
+ width: 100%;
+}
+
 .meal-bar input {
     border: solid black 2px;
-    width:100%;
+    width:95%;
     padding: 3px;
     margin: 3px;
     border-radius: 3px;

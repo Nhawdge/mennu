@@ -1,12 +1,12 @@
 var app = new Vue({
     el: '#meal-planner',
-    data : {
-        message:'Hello',
+    data: {
+        message: 'Hello',
         suggestions: [
-            {text: "Spaghetti"},
-            {text: "Broccoli"},
-            {text: "Peas"},
-            {text: "Carrots"}
+            { text: "Spaghetti" },
+            { text: "Broccoli" },
+            { text: "Peas" },
+            { text: "Carrots" }
         ]
     }
 })
