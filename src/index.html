@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mennu the Meal Betrayer</title>
-    <link rel="stylesheet" href="mennu.css">
+    <link rel="stylesheet" href="mennu.css">    
+    <script src="tools.js"></script>
     <script src="https://vuejs.org/js/vue.js"></script>
 </head>
 
@@ -26,10 +27,8 @@
         <div v-for="item in suggestions">
             <div class="meal-item" draggable="true">
                 {{item.text}}
-            </div>
-            
-        </div>
-        
+            </div>            
+        </div>        
     </div>
     
     

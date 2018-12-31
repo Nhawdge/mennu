@@ -1,10 +1,10 @@
-const api = require('./mysql.js');
-const schema = require('./config.js');
-const tools = require('./tools.js')
+const mysql = require('../mysql.js');
+const schema = require('../config.js');
+const tools = require('../tools.js')
 
 module.exports = {
     getAll: function (callback) {
-        api.query(`SELECT * FROM ${schema.table.meal}`, callback);
+        mysql.query(`SELECT * FROM ${schema.table.meal}`, callback);
     },
     add: function (callback) {
         var query = 
@@ -12,8 +12,7 @@ module.exports = {
             (\`id\`)
             VALUES
             ('${tools.guid()}')`;
-            console.log(query);
-            api.query(query);
+            mysql.query(query);
     },
     edit: function () {
 

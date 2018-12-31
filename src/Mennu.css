@@ -2,6 +2,12 @@
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
+body{
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 10px;
+}
+
 .meal-table {
     border: solid black 2px;
     width: 70%;
