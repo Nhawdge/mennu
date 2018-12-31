@@ -5,39 +5,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mennu the Meal Betrayer</title>
-    <link rel="stylesheet" href="Mennu.css">
+    <link rel="stylesheet" href="mennu.css">
+    <script src="https://vuejs.org/js/vue.js"></script>
 </head>
 
 <body>
-    <h1>Menu the Meal Betrayer</h1>
+    <div id="meal-planner">
+    <h1>Mennu the Meal Betrayer</h1>
     <h2>Meal Plan</h2>
-
+    
     <div class="meal-bar">
         <h3>
             Meal Ideas
         </h3>
         <input placeholder="Filter">
         <br>
-
-        <div class="meal-item" draggable="true">
-            Spaghetti
+        
+        <div v-for="item in suggestions">
+            <div class="meal-item" draggable="true">
+                {{item.text}}
+            </div>
+            
         </div>
-
-        <div class="meal-item" draggable="true">
-            Spaghetti
-        </div>
-
-        <div class="meal-item" draggable="true">
-            Spaghetti
-        </div>
-
-        <div class="meal-item" draggable="true">
-            Spaghetti
-        </div>
-
-
-
+        
     </div>
+    
+    
     <table class="meal-table">
         <thead>
             <tr>
@@ -62,12 +55,12 @@
             </tr>
             <tr>
                 <td> </td>
-                <td> </td>
+                <td>BBQ Pork left overs</td>
                 <td>Turkey sandwich</td>
                 <td>Meat loaf Left overs</td>
                 <td>Tacos</td>
                 <td>Chicken, rice, broccoli</td>
-                <td> </td>
+                <td>Egg Salad sandwiches</td>
             </tr>
             <tr>
                 <td> </td>
@@ -75,11 +68,13 @@
                 <td>Meat loaf and potatos</td>
                 <td>Tacos</td>
                 <td>Chicken, rice, broccoli</td>
-                <td> </td>
-                <td> </td>
+                <td>Instant Pot something?</td>
+                <td>Take out?</td>
             </tr>
         </tbody>
     </table>
+    </div>
+    <script src="vue.js"></script>
 </body>
 
 </html>
