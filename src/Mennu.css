@@ -66,3 +66,16 @@ body{
     border-radius: 3px;
     box-sizing: border-box;
 }
+
+.menu {
+    display: block;
+}
+
+.menu button {
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 220, .3);
+    padding: 10px;
+    min-width: 75px;
+    font-size: 1.1rem;
+}

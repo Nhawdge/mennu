@@ -1,25 +1,26 @@
 var app = new Vue({
     el: '#meal-planner',
     data: {
-        message: 'Hello',
-        suggestions: [
-            { text: "Spaghetti" },
-            { text: "Broccoli" },
-            { text: "Peas" },
-            { text: "Carrots" }
-        ]
+        suggestions: [],
+        showAdd: false
     },
     methods: {
+        loadMeals: function () {
+            var self = this;
 
+            get('/meals', function (response) {
+                self.$data.suggestions = response.map(function (r) {
+                    return { text: r.id };
+                })
+            });
+        },
+        showAdd:function() {
+            console.log("adding");
+            this.$data.showAdd
+        }
+    
     },
-    created: function() {
-        loadMeals();
-        console.log("loaded");
+    created: function () {
+        this.loadMeals();
     }
 })
-
-function loadMeals() {
-    get('/meals', function(res) {
-        console.log(res);
-    }); 
-}

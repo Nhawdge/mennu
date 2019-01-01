@@ -6,12 +6,12 @@ module.exports = {
     getAll: function (callback) {
         mysql.query(`SELECT * FROM ${schema.table.meal}`, callback);
     },
-    add: function (callback) {
+    add: function (name, callback) {
         var query = 
             `INSERT INTO ${schema.table.meal}
-            (\`id\`)
+            (\`id\`, \`name\`)
             VALUES
-            ('${tools.guid()}')`;
+            ('${tools.guid()}', '${name}' )`;
             mysql.query(query);
     },
     edit: function () {

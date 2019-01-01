@@ -7,19 +7,13 @@ const fs = require('fs');
 module.exports = {
   server: function () {
     return http.createServer((req, res) => {
+      console.log("Request from:", req.url);
 
-      console.log("Request from: ", req.url);
-      if (req.url) {
-        res.statusCode = 200;
-        res.setHeader('Content-Type', 'text/json');
-        var apiCall = router(req.url);
-        apiCall(function (result) { res.end(result) });
-      }
-      else {
-        res.statusCode = 404;
-        res.setHeader('Content-Type', 'text/plain');
-        res.end('No endpoint found\n');
-      }
+      res.statusCode = 200;
+      var apiCall = router(req.url);
+      apiCall(function (result) {
+        res.end(result)
+      });
     });
   },
   start: function () {
@@ -38,7 +32,16 @@ function router(path) {
       return api.ingredients.getAll;
       break;
     default:
-      return function () { };
+      return serveHtml(path);
       break;
+  }
+}
+
+function serveHtml(path) {
+  return function (callback) {
+    if (path == '/') { path = '/index.html' }
+    fs.readFile("./src" + path, "utf8", function (err, data) {
+      callback(data);
+    })
   }
 }
