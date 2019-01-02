@@ -79,3 +79,7 @@ body{
     min-width: 75px;
     font-size: 1.1rem;
 }
+
+.active {
+    background-color: blue;
+}

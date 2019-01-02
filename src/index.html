@@ -15,7 +15,13 @@
     <h1>Mennu the Meal Betrayer</h1>
     <h2>Meal Plan</h2>
     <div class="menu">
-        <button v-on:click="showAdd">Add</button>
+        <button v-on:click="toggleShowAdd">Add</button>
+    </div>
+    <div v-if="showAdd">
+        <label> Meal Name</label>
+        <input v-model="newMeal.name" />
+        <button v-on:click="addNewMeal">Save</button>
+        
     </div>
     
     <div class="meal-bar">
@@ -27,9 +33,9 @@
         </label>
         <br>
         
-        <div v-for="item in suggestions">
-            <div class="meal-item" draggable="true">
-                {{item.text}}
+        <div v-for="item in suggestions" v-on:click="makeActive(item)"  >
+            <div v-bind:class="{ active: item.isActive }"  class="meal-item" draggable="true" v-on:dragstart="dragStart($event, item)" >
+                {{item.name}}
             </div>            
         </div>        
     </div>
@@ -48,32 +54,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Pancakes</td>
-                <td>Waffles</td>
-                <td>Eggs and Toast</td>
-                <td>Yogurt</td>
-                <td>Cereal</td>
-                <td>Yogurt</td>
-                <td>Pancakes</td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td>BBQ Pork left overs</td>
-                <td>Turkey sandwich</td>
-                <td>Meat loaf Left overs</td>
-                <td>Tacos</td>
-                <td>Chicken, rice, broccoli</td>
-                <td>Egg Salad sandwiches</td>
-            </tr>
-            <tr>
-                <td> </td>
-                <td> </td>
-                <td>Meat loaf and potatos</td>
-                <td>Tacos</td>
-                <td>Chicken, rice, broccoli</td>
-                <td>Instant Pot something?</td>
-                <td>Take out?</td>
+            <tr v-for="mealrow in mealPlan">
+                <td v-for="meal in mealrow.meals" 
+                v-on:drop="mealDrop" 
+                v-on:dragover="$event.preventDefault()"> 
+                    {{meal.name}} 
+            </td>
             </tr>
         </tbody>
     </table>

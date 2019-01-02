@@ -7,13 +7,35 @@ const fs = require('fs');
 module.exports = {
   server: function () {
     return http.createServer((req, res) => {
-      console.log("Request from:", req.url);
+      console.log( req.method,  "Request from:", req.url);
 
       res.statusCode = 200;
       var apiCall = router(req.url);
-      apiCall(function (result) {
-        res.end(result)
-      });
+
+      if (req.method == 'GET') {
+        apiCall(function (result) {
+          res.end(result)
+        })
+      }
+      else if (req.method == 'POST') {
+        console.log(`'${req.data}'`);
+        var body = "";
+
+        req.on('data', function(data) {
+          body += data;
+        });
+
+        req.on('end', function(data) {
+          if (data) {
+            body += data;
+          }
+          
+          console.log("body is: ", body);
+          apiCall(JSON.parse(body), function(result) {
+            res.end(result)
+          })
+        });
+      }
     });
   },
   start: function () {
@@ -27,6 +49,9 @@ function router(path) {
   switch (path) {
     case '/meals':
       return api.meals.getAll;
+      break;
+    case '/meals/add':
+      return api.meals.add;
       break;
     case '/ingredients':
       return api.ingredients.getAll;
