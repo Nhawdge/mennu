@@ -5,64 +5,86 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mennu the Meal Betrayer</title>
-    <link rel="stylesheet" href="mennu.css">    
+    <link rel="stylesheet" href="mennu.css">
     <script src="tools.js"></script>
     <script src="https://vuejs.org/js/vue.js"></script>
 </head>
 
 <body>
     <div id="meal-planner">
-    <h1>Mennu the Meal Betrayer</h1>
-    <h2>Meal Plan</h2>
-    <div class="menu">
-        <button v-on:click="toggleShowAdd">Add</button>
-    </div>
-    <div v-if="showAdd">
-        <label> Meal Name</label>
-        <input v-model="newMeal.name" />
-        <button v-on:click="addNewMeal">Save</button>
-        
-    </div>
-    
-    <div class="meal-bar">
-        <h3>
-            Meal Ideas
-        </h3>
-        <label>
-            <input placeholder="Filter">
-        </label>
-        <br>
-        
-        <div v-for="item in suggestions" v-on:click="makeActive(item)"  >
-            <div v-bind:class="{ active: item.isActive }"  class="meal-item" draggable="true" v-on:dragstart="dragStart($event, item)" >
-                {{item.name}}
-            </div>            
-        </div>        
-    </div>
-    
-    
-    <table class="meal-table">
-        <thead>
-            <tr>
-                <th>Sun</th>
-                <th>Mon</th>
-                <th>Tue</th>
-                <th>Wed</th>
-                <th>Thu</th>
-                <th>Fri</th>
-                <th>Sat</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="mealrow in mealPlan">
-                <td v-for="meal in mealrow.meals" 
-                v-on:drop="mealDrop" 
-                v-on:dragover="$event.preventDefault()"> 
-                    {{meal.name}} 
-            </td>
-            </tr>
-        </tbody>
-    </table>
+        <h1>Mennu the Meal Betrayer</h1>
+        <h2>Meal Plan</h2>
+        <div v-if="visiblePage === views.main">
+            <div class="menu">
+                <button v-on:click="toggleShowAdd">Add</button>
+                <button v-on:click="showEdit">Edit</button>
+            </div>
+            <div v-if="showAdd">
+                <label> Meal Name</label>
+                <input v-model="newMeal.name" />
+                <button v-on:click="addNewMeal">Save</button>
+            </div>
+
+            <div class="meal-bar">
+                <h3>
+                    Meal Ideas
+                </h3>
+                <label>
+                    <input placeholder="Filter">
+                </label>
+                <br>
+
+                <div v-for="item in suggestions" v-on:click="makeActive(item)">
+                    <div v-bind:class="{ active: item.isActive }" class="meal-item" draggable="true" v-on:dragstart="dragStart($event, item)">
+                        {{item.name}}
+                    </div>
+                </div>
+            </div>
+
+
+            <table class="meal-table">
+                <thead>
+                    <tr>
+                        <th>Sun</th>
+                        <th>Mon</th>
+                        <th>Tue</th>
+                        <th>Wed</th>
+                        <th>Thu</th>
+                        <th>Fri</th>
+                        <th>Sat</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="mealrow in mealPlan">
+                        <td v-for="meal in mealrow.meals" v-on:drop="mealDrop($event, meal)" v-on:dragover="$event.preventDefault()">
+                            {{meal.name}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div v-if="visiblePage === views.edit">
+            <h2>Edit</h2>
+            <button v-on:click="showMain">Back</button>
+            <form>
+                <label>Meal Name</label>
+                <input />
+                <label>Servings</label>
+                <input type="number" />
+
+                <label>Instructions</label>
+                <textarea></textarea>
+
+                <label>Ingredients</label>
+                <input class="ingredient"> 
+                <input class="ingredient">                
+                <button v-on:click="saveMeal">
+                    Save</button>
+            </form>
+            
+
+        </div>
+
     </div>
     <script src="vue.js"></script>
 </body>
