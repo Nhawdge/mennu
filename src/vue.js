@@ -87,8 +87,11 @@ var app = new Vue({
     computed: {
         canShowEdit: function(){
             var self = this;
-            var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
-            return !meal.length == 0;
+            if (self.$data.suggestions.length){
+                var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
+                return !meal.length == 0;
+            }
+            return false;
 
         }
     },
@@ -116,27 +119,33 @@ function Meal(data) {
     self.update(data);
 }
 
-function MealPlan(data) {
+function MealDay(data) {
     var self = this;
     if (data == null) { data = {} }
 
-    self.breakfast = new MealRow();
-    self.lunch = new MealRow();
-    self.dinner = new MealRow();
+    self.dayOfWeek = 'Sunday';
+
+    self.meals = [
+        new Meal(),
+        new Meal(),
+        new Meal()
+    ]
 
 }
 
-function MealRow(data) {
+function MealPlan(data) {
     var self = this;
     if (data == null) { data = {} };
 
-    self.meals = [new Meal(),
-    new Meal(),
-    new Meal(),
-    new Meal(),
-    new Meal(),
-    new Meal(),
-    new Meal()]
+    self.days = [ 
+        new MealDay(),
+        new MealDay(),
+        new MealDay(),
+        new MealDay(),
+        new MealDay(),
+        new MealDay(),
+        new MealDay(),
+    ];
 
 }
 

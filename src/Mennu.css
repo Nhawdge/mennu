@@ -2,13 +2,13 @@
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
-body{
+.body{
     max-width: 1250px;
     margin: auto;
     padding: 0 10px;
     display: grid;
 
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     
     grid-template-areas: 
     "header header header header"
@@ -18,10 +18,29 @@ body{
 
 .header { grid-area: header; }
 
-.bar { grid-area: bar }
+.bar { grid-area: bar; }
 
-.main { grid-area: main }
+.menu { grid-area: menu; }
 
+.main { grid-area: main; }
+
+.meal-plan {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.meal-plan div {
+    grid-column: span 1;
+}
+
+
+.meal {
+    border: solid black 2px;
+    border-radius: 3px;
+    padding: 3px;
+    margin:1px;
+    min-height: 50px;
+}
 
 /* 
 .meal-table {
