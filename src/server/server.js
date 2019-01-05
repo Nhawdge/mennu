@@ -53,6 +53,9 @@ function router(path) {
     case '/meals/add':
       return api.meals.add;
       break;
+    case '/meals/save':
+      return api.meals.edit;
+      break;
     case '/ingredients':
       return api.ingredients.getAll;
       break;
@@ -66,7 +69,12 @@ function serveHtml(path) {
   return function (callback) {
     if (path == '/') { path = '/index.html' }
     fs.readFile("./src" + path, "utf8", function (err, data) {
-      callback(data);
+      if (data){
+        callback(data);
+      }
+      else {
+        console.warn("File not found");
+      }
     })
   }
 }

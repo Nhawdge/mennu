@@ -6,8 +6,24 @@ body{
     max-width: 1250px;
     margin: auto;
     padding: 0 10px;
+    display: grid;
+
+    grid-template-columns: auto auto auto auto;
+    
+    grid-template-areas: 
+    "header header header header"
+    "menu menu menu menu"
+    "bar main main main"
 }
 
+.header { grid-area: header; }
+
+.bar { grid-area: bar }
+
+.main { grid-area: main }
+
+
+/* 
 .meal-table {
     border: solid black 2px;
     width: 70%;
@@ -40,7 +56,6 @@ body{
     
 }
 
-/* Meal Bar */
 .meal-bar {
     float: left;
     width: 30%;
@@ -69,6 +84,7 @@ body{
 
 .menu {
     display: block;
+    list-style: none;
 }
 
 .menu button {
@@ -93,7 +109,7 @@ form{
 
 }
  
-form label, form input {
+form label, form input, form button {
     grid-column-start: 1;
 }
 
@@ -102,6 +118,7 @@ form textarea {
     grid-row: span 3;
 } 
 
-form button {
-    grid-column-start: 1;
-}
+.ingredient {
+    grid-column-start: span 1;
+} 
+*/

@@ -6,7 +6,7 @@ function get(url, callback) {
             try {
                 callback(JSON.parse(request.responseText));
             }
-            catch(ex){
+            catch (ex) {
                 console.groupCollapsed(ex);
                 console.warn("Couldn't parse")
                 console.log(request.responseText)
@@ -17,7 +17,7 @@ function get(url, callback) {
     request.send();
 }
 
-function post(url,data, callback){
+function post(url, data, callback) {
     var request = new XMLHttpRequest();
     request.open('POST', url, true);
     request.setRequestHeader('Content-type', 'application/json');
@@ -25,9 +25,16 @@ function post(url,data, callback){
     request.onreadystatechange = function () {
         if (request.status === 200 && request.responseText) {
             try {
-                callback(JSON.parse(request.responseText));
+                var response = null;
+                if (typeof (request.responseText) == typeof ({})) {
+                    response = request.responseText;
+                }
+                else {
+                    response = JSON.parse(request.responseText);
+                }
+                callback(response);
             }
-            catch(ex){
+            catch (ex) {
                 console.groupCollapsed(ex);
                 console.warn("Couldn't parse")
                 console.log(request.responseText)
