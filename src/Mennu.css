@@ -43,54 +43,6 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
 }
 
 /* 
-.meal-table {
-    border: solid black 2px;
-    width: 70%;
-    float: left;
-}
-
-.meal-table th {
-    font-size: 1.5rem;
-    border-bottom: solid black 2px;
-}
-
-.meal-table * {
-    padding: 1px;
-    margin: 2px;
-    text-align: center;
-}
-
-.meal-table tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, .3);
-}
-
-.meal-table tbody td{
-    border-right: solid rgba(0, 0, 0, .3) 1px;
-}
-
-.meal-table td {
-    border-bottom: solid black 1px;
-    height: 7rem;
-    width: 14%;
-    
-}
-
-.meal-bar {
-    float: left;
-    width: 30%;
-}
-
-.meal-item {
-    border: solid black 1px;
-    padding: 5px;
-    margin: 5px;
-    float: left;
-    width: auto;
-}
-
-.meal-bar label {
- width: 100%;
-}
 
 .meal-bar input {
     border: solid black 2px;
@@ -100,23 +52,28 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
     border-radius: 3px;
     box-sizing: border-box;
 }
+*/
 
-.menu {
-    display: block;
-    list-style: none;
-}
 
 .menu button {
     border: solid black 2px;
     border-radius: 3px;
-    background-color: rgba(0, 0, 220, .3);
+    background-color: rgba(0, 0, 200, .3);
     padding: 10px;
     min-width: 75px;
     font-size: 1.1rem;
 }
 
 .active {
-    background-color: blue;
+    background-color:rgba(0, 200, 50, .7)
+}
+
+.meal-item {
+    border: solid black 1px;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    width: auto;
 }
 
 form{
@@ -140,4 +97,3 @@ form textarea {
 .ingredient {
     grid-column-start: span 1;
 } 
-*/

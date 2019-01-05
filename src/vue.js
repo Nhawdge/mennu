@@ -112,7 +112,7 @@ function Meal(data) {
         self.name = (data.name || "");
         self.id = (data.id || "");
         self.instructions = (data.instructions || "");
-        self.ingredients = (data.ingredients || [ {name: "test"}]);
+        self.ingredients = (data.ingredients || [ new Ingredient() ]);
         self.servings = (data.servings || 0);
     }
 
