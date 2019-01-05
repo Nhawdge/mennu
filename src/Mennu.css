@@ -2,61 +2,47 @@
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
-body{
+.body{
     max-width: 1250px;
     margin: auto;
     padding: 0 10px;
-}
+    display: grid;
 
-.meal-table {
-    border: solid black 2px;
-    width: 70%;
-    float: left;
-}
-
-.meal-table th {
-    font-size: 1.5rem;
-    border-bottom: solid black 2px;
-}
-
-.meal-table * {
-    padding: 1px;
-    margin: 2px;
-    text-align: center;
-}
-
-.meal-table tbody tr:nth-of-type(odd) {
-    background-color: rgba(0, 0, 0, .3);
-}
-
-.meal-table tbody td{
-    border-right: solid rgba(0, 0, 0, .3) 1px;
-}
-
-.meal-table td {
-    border-bottom: solid black 1px;
-    height: 7rem;
-    width: 14%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     
+    grid-template-areas: 
+    "header header header header"
+    "menu menu menu menu"
+    "bar main main main"
 }
 
-/* Meal Bar */
-.meal-bar {
-    float: left;
-    width: 30%;
+.header { grid-area: header; }
+
+.bar { grid-area: bar; }
+
+.menu { grid-area: menu; }
+
+.main { grid-area: main; }
+
+.meal-plan {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
 }
 
-.meal-item {
-    border: solid black 1px;
-    padding: 5px;
-    margin: 5px;
-    float: left;
-    width: auto;
+.meal-plan div {
+    grid-column: span 1;
 }
 
-.meal-bar label {
- width: 100%;
+
+.meal {
+    border: solid black 2px;
+    border-radius: 3px;
+    padding: 3px;
+    margin:1px;
+    min-height: 50px;
 }
+
+/* 
 
 .meal-bar input {
     border: solid black 2px;
@@ -66,22 +52,28 @@ body{
     border-radius: 3px;
     box-sizing: border-box;
 }
+*/
 
-.menu {
-    display: block;
-}
 
 .menu button {
     border: solid black 2px;
     border-radius: 3px;
-    background-color: rgba(0, 0, 220, .3);
+    background-color: rgba(0, 0, 200, .3);
     padding: 10px;
     min-width: 75px;
     font-size: 1.1rem;
 }
 
 .active {
-    background-color: blue;
+    background-color:rgba(0, 200, 50, .7)
+}
+
+.meal-item {
+    border: solid black 1px;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    width: auto;
 }
 
 form{
@@ -93,7 +85,7 @@ form{
 
 }
  
-form label, form input {
+form label, form input, form button {
     grid-column-start: 1;
 }
 
@@ -102,6 +94,6 @@ form textarea {
     grid-row: span 3;
 } 
 
-form button {
-    grid-column-start: 1;
-}
+.ingredient {
+    grid-column-start: span 1;
+} 

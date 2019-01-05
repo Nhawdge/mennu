@@ -11,80 +11,89 @@
 </head>
 
 <body>
-    <div id="meal-planner">
-        <h1>Mennu the Meal Betrayer</h1>
-        <h2>Meal Plan</h2>
-        <div v-if="visiblePage === views.main">
-            <div class="menu">
+    <div id="meal-planner" class="body">
+        <div class="header">
+            <h1>Mennu the Meal Betrayer</h1>
+        </div>
+
+        <div class="menu">
+            <span>
                 <button v-on:click="toggleShowAdd">Add</button>
+            </span>
+            <span v-if="canShowEdit">
                 <button v-on:click="showEdit">Edit</button>
-            </div>
-            <div v-if="showAdd">
-                <label> Meal Name</label>
-                <input v-model="newMeal.name" />
-                <button v-on:click="addNewMeal">Save</button>
-            </div>
+            </span>
+        </div>
 
-            <div class="meal-bar">
-                <h3>
-                    Meal Ideas
-                </h3>
-                <label>
-                    <input placeholder="Filter">
-                </label>
-                <br>
 
-                <div v-for="item in suggestions" v-on:click="makeActive(item)">
-                    <div v-bind:class="{ active: item.isActive }" class="meal-item" draggable="true" v-on:dragstart="dragStart($event, item)">
-                        {{item.name}}
+        <div class="bar">
+            <h2>Meal Plan</h2>
+            <div>
+                <div v-if="showAdd">
+                    <label> Meal Name</label>
+                    <input v-model="newMeal.name" />
+                    <button v-on:click="addNewMeal">Save</button>
+                </div>
+
+                <div class="meal-bar">
+                    <h3>
+                        Meal Ideas
+                    </h3>
+                    <label>
+                        <input placeholder="Filter">
+                    </label>
+                    <br>
+
+                    <div v-for="item in suggestions" v-on:click="makeActive(item)">
+                        <div v-bind:class="{ active: item.isActive }" class="meal-item" draggable="true" v-on:dragstart="dragStart($event, item)">
+                            {{item.name}}
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            <table class="meal-table">
-                <thead>
-                    <tr>
-                        <th>Sun</th>
-                        <th>Mon</th>
-                        <th>Tue</th>
-                        <th>Wed</th>
-                        <th>Thu</th>
-                        <th>Fri</th>
-                        <th>Sat</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="mealrow in mealPlan">
-                        <td v-for="meal in mealrow.meals" v-on:drop="mealDrop($event, meal)" v-on:dragover="$event.preventDefault()">
-                            {{meal.name}}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
-        <div v-if="visiblePage === views.edit">
-            <h2>Edit</h2>
-            <button v-on:click="showMain">Back</button>
-            <form>
-                <label>Meal Name</label>
-                <input />
-                <label>Servings</label>
-                <input type="number" />
+        <div class="main">
+            <div class="meal-plan" v-if="visiblePage === views.main">
+                <div v-for="day in mealPlan.days">
+                    {{ day.dayOfWeek }}
 
-                <label>Instructions</label>
-                <textarea></textarea>
+                    <div class="meal" v-for="meal in day.meals" v-on:drop="mealDrop($event, meal)" v-on:dragover="$event.preventDefault()">
+                        {{ meal.name }}
+                    </div>
 
-                <label>Ingredients</label>
-                <input class="ingredient"> 
-                <input class="ingredient">                
-                <button v-on:click="saveMeal">
-                    Save</button>
-            </form>
-            
 
+
+                </div>
+
+            </div>
+
+
+            <div v-if="visiblePage === views.edit">
+                <h2>Edit</h2>
+                <button v-on:click="showMain">Back</button>
+                <form>
+                    <label>Meal Name</label>
+                    <input v-model="newMeal.name" />
+                    <label>Servings</label>
+                    <input type="number" v-model="newMeal.servings" />
+
+                    <label>Instructions</label>
+                    <textarea v-model="newMeal.instructions"></textarea>
+
+                    <label>Ingredients</label>
+
+                    <template v-for="ingredient in newMeal.ingredients">
+                        <input v-model="ingredient.name">
+                        <input v-model="ingredient.amount">
+
+                    </template>
+                    <button v-on:click="addIngredient"> +</button>
+
+                    <button v-on:click="saveMeal">
+                        Save</button>
+                </form>
+            </div>
         </div>
-
     </div>
     <script src="vue.js"></script>
 </body>
