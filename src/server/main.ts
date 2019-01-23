@@ -1,3 +1,3 @@
-const server = require('./server')
+import * as server from "./server"
 
-server.start();
+server.default.start();

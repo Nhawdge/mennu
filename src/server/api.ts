@@ -1,9 +1,9 @@
-var meals = require('./tables/meal');
-var ingredients = require('./tables/ingredient');
-var plans = require('./tables/plan')
+import { meals } from "./tables/meal";
+import { ingredients } from "./tables/ingredient";
+import { plans } from "./tables/plan";
 
-module.exports = {
-    meals: meals,
-    ingredients: ingredients,
-    plans: plans
+export class api {
+    static meals = meals;
+    static ingredients = ingredients;
+    static plans = plans;
 }

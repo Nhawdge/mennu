@@ -1,3 +1,5 @@
-module.exports = {
-    getAll:function(){}
+export class ingredients {
+    static getAll() {
+
+    };
 }

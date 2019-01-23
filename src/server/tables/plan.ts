@@ -1,3 +1,5 @@
-module.exports = {
-    getAll:function(){}
+export class plans {
+    static getAll() {
+
+    };
 }

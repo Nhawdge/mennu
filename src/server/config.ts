@@ -1,9 +1,10 @@
-module.exports = {
-    table: {
+export class schema {
+    static table = {
         meal: "meal",
         ingredient: 'ingredient',
         mealingredient: 'mealingredients'
-    },
-    dev:
+    };
+    static dev: {};
+    static prod: {};
 
 }

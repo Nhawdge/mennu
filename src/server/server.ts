@@ -1,13 +1,13 @@
 const http = require('http');
 const hostname = '127.0.0.1';
 const port = 3000;
-const api = require('./api');
 const fs = require('fs');
+import { api } from "./api";
 
-module.exports = {
-  server: function () {
+export default class {
+  static server() {
     return http.createServer((req, res) => {
-      console.log( req.method,  "Request from:", req.url);
+      console.log(req.method, "Request from:", req.url);
 
       res.statusCode = 200;
       var apiCall = router(req.url);
@@ -21,31 +21,31 @@ module.exports = {
         console.log(`'${req.data}'`);
         var body = "";
 
-        req.on('data', function(data) {
+        req.on('data', function (data) {
           body += data;
         });
 
-        req.on('end', function(data) {
+        req.on('end', function (data) {
           if (data) {
             body += data;
           }
-          
+
           console.log("body is: ", body);
-          apiCall(JSON.parse(body), function(result) {
+          apiCall(JSON.parse(body), function (result) {
             res.end(result)
           })
         });
       }
     });
-  },
-  start: function () {
+  };
+  static start() {
     this.server().listen(port, hostname, () => {
       console.log(`Server running at http://${hostname}:${port}/`);
     });
   }
 }
 
-function router(path) {
+function router(path): Function {
   switch (path) {
     case '/meals':
       return api.meals.getAll;
@@ -69,7 +69,7 @@ function serveHtml(path) {
   return function (callback) {
     if (path == '/') { path = '/index.html' }
     fs.readFile("./src" + path, "utf8", function (err, data) {
-      if (data){
+      if (data) {
         callback(data);
       }
       else {

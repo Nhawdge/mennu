@@ -1,12 +1,14 @@
-const mysql = require('../mysql.js');
-const schema = require('../config.js');
-const tools = require('../tools.js')
+import  "../mysql";
+import { schema } from "../config";
+import tools from "../tools";
+import mysql from "../mysql";
 
-module.exports = {
-    getAll: function (callback) {
+export class meals {
+    static getAll(callback) {
         mysql.query(`SELECT * FROM ${schema.table.meal}`, callback);
-    },
-    add: function (meal, callback) {
+    };
+
+    static add(meal, callback) {
         if (!meal) { return }
         console.log("Saving new meal ", meal.name)
         var query =
@@ -16,8 +18,9 @@ module.exports = {
             ('${tools.guid()}', '${meal.name}' )`;
         mysql.query(query);
         callback(JSON.stringify({ isSucess: true }));
-    },
-    edit: function (meal, callback) {
+    };
+
+    static edit(meal, callback) {
         if (!meal) { return }
         console.log("Saving new meal ", typeof (meal), meal)
 
@@ -33,7 +36,7 @@ module.exports = {
          WHERE \`id\` = '${meal.id}';
          `;
 
-        for (ingredient of meal.ingredients) {
+        for (let ingredient of meal.ingredients) {
             var guid = tools.guid();
             query += `
             INSERT INTO \`${schema.table.ingredient}\`
@@ -67,6 +70,6 @@ module.exports = {
 
         console.log("Query would be\n", query);
         //mysql.query(query);
-    },
-    delete: function () { }
+    };
+    static delete () { };
 }
