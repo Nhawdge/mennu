@@ -1,6 +1,7 @@
 var views = {
     main: 'main',
-    edit: 'edit'
+    edit: 'edit',
+    help: 'help'
 }
 
 var app = new Vue({
@@ -68,6 +69,9 @@ var app = new Vue({
         },
         showMain: function() {
             this.$data.visiblePage = views.main;
+        },
+        showHelp: function() {
+            this.$data.visiblePage = views.help;
         },
         saveMeal : function(e) {
             var self = this;

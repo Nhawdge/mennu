@@ -16,11 +16,18 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
     "bar main main main"
 }
 
-.header { grid-area: header; }
+.header { 
+    grid-area: header;
+    text-align: center;
+}
 
 .bar { grid-area: bar; }
 
-.menu { grid-area: menu; }
+.menu {
+     grid-area: menu; 
+     background-color: rgba(0,150,200,.3);
+     padding:15px;
+    }
 
 .main { grid-area: main; }
 
@@ -66,6 +73,10 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
 
 .active {
     background-color:rgba(0, 200, 50, .7)
+}
+
+.disabled button {
+    opacity: 0.3;
 }
 
 .meal-item {

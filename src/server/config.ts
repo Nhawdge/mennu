@@ -3,5 +3,7 @@ module.exports = {
         meal: "meal",
         ingredient: 'ingredient',
         mealingredient: 'mealingredients'
-    }
+    },
+    dev:
+
 }

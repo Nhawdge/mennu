@@ -18,10 +18,13 @@
 
         <div class="menu">
             <span>
-                <button v-on:click="toggleShowAdd">Add</button>
+                <button v-on:click="showMain">Home</button>
             </span>
-            <span v-if="canShowEdit">
+            <span v-bind:class="{ disabled: !canShowEdit }" >
                 <button v-on:click="showEdit">Edit</button>
+            </span>
+            <span>
+                <button v-on:click="showHelp">Help!</button>
             </span>
         </div>
 
@@ -29,9 +32,9 @@
         <div class="bar">
             <h2>Meal Plan</h2>
             <div>
-                <div v-if="showAdd">
-                    <label> Meal Name</label>
-                    <input v-model="newMeal.name" />
+                <div>
+                    <label> Add new Meal</label>
+                    <input v-model="newMeal.name" placeholder="Name" />
                     <button v-on:click="addNewMeal">Save</button>
                 </div>
 
@@ -60,17 +63,12 @@
                     <div class="meal" v-for="meal in day.meals" v-on:drop="mealDrop($event, meal)" v-on:dragover="$event.preventDefault()">
                         {{ meal.name }}
                     </div>
-
-
-
                 </div>
-
             </div>
 
 
             <div v-if="visiblePage === views.edit">
                 <h2>Edit</h2>
-                <button v-on:click="showMain">Back</button>
                 <form>
                     <label>Meal Name</label>
                     <input v-model="newMeal.name" />
@@ -92,6 +90,24 @@
                     <button v-on:click="saveMeal">
                         Save</button>
                 </form>
+            </div>
+
+            <div v-if="visiblePage === views.help">
+                <h2>Help!</h2>
+                <ul>
+                    <li>
+                        Click add to add a new recipe/meal.
+                    </li>
+                    <li>
+                        Drag and drop your recipe/meal onto a time slot.
+                    </li>
+                    <li>
+                        Click on a meal to edit it.
+                    </li>
+                    <li>
+                        Enjoy your food and grocery list
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
