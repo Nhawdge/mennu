@@ -1,6 +1,8 @@
 {
     "compilerOptions": {
         "outDir": "build",
+        "experimentalDecorators": true,
+        "module": "commonjs"
     },
     "include": [
         "src/**/*"

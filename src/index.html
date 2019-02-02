@@ -5,9 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mennu the Meal Betrayer</title>
-    <link rel="stylesheet" href="mennu.css">
-    <script src="tools.js"></script>
+    <link rel="stylesheet" href="/assets/mennu.css">
+    <script src="/web/tools.js"></script>
     <script src="https://vuejs.org/js/vue.js"></script>
+    <script>
+        var exports = {};
+    </script>
 </head>
 
 <body>
@@ -16,14 +19,16 @@
             <h1>Mennu the Meal Betrayer</h1>
         </div>
 
+        <test></test>
+        
         <div class="menu">
-            <span>
+            <span v-bind:class="{ selected: visiblePage === views.main }">
                 <button v-on:click="showMain">Home</button>
             </span>
-            <span v-bind:class="{ disabled: !canShowEdit }" >
+            <span v-bind:class="{ disabled: !canShowEdit, selected: visiblePage === views.edit }" >
                 <button v-on:click="showEdit">Edit</button>
             </span>
-            <span>
+            <span v-bind:class="{ selected: visiblePage === views.help }">
                 <button v-on:click="showHelp">Help!</button>
             </span>
         </div>
@@ -31,7 +36,7 @@
 
         <div class="bar">
             <h2>Meal Plan</h2>
-            <div>
+            <div> 
                 <div>
                     <label> Add new Meal</label>
                     <input v-model="newMeal.name" placeholder="Name" />
@@ -111,7 +116,7 @@
             </div>
         </div>
     </div>
-    <script src="vue.js"></script>
+    <script src="/web/app.js"></script>
 </body>
 
 </html>

@@ -28,7 +28,11 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
      grid-area: menu; 
      background-color: rgba(0,150,200,.3);
      padding:15px;
-    }
+}
+
+.menu .selected button {
+    background-color: rgba(0, 0, 200, .5)
+}
 
 .main { grid-area: main; }
 

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc & node build/main.js",
+    "start": " node build/server/main.js",
     "watch": "tsc -w"
   },
   "repository": {
@@ -19,7 +19,11 @@
   "homepage": "https://github.com/Nhawdge/mennu#readme",
   "dependencies": {
     "@types/node": "^10.12.18",
+    "commonjs": "0.0.1",
+    "express": "^4.16.4",
     "http-server": "^0.11.1",
-    "mysql": "^2.16.0"
+    "mysql": "^2.16.0",
+    "vue": "^2.5.22",
+    "vue-class-component": "^6.3.2"
   }
 }
