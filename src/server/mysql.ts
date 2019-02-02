@@ -1,5 +1,5 @@
-module.exports = {
-    connection: function () {
+export default class {
+    static connection() {
         var mysql = require('mysql');
 
         return mysql.createConnection({
@@ -9,8 +9,8 @@ module.exports = {
             database: "mennu"
         });
 
-    },
-    query: function (query, callback) {
+    };
+    static query(query, callback?: Function) {
         var con = this.connection();
 
         con.connect(function (err) {
@@ -22,6 +22,6 @@ module.exports = {
                 }
             });
         });
-    }
+    };
 
 }

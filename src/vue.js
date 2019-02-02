@@ -1,6 +1,7 @@
 var views = {
     main: 'main',
-    edit: 'edit'
+    edit: 'edit',
+    help: 'help'
 }
 
 var app = new Vue({
@@ -19,7 +20,7 @@ var app = new Vue({
             console.log('loading meals');
             get('/meals', function (response) {
                 self.$data.suggestions = response.map(function (r) {
-                    return new Meal(r); 
+                    return new Meal(r);
                 })
             });
         },
@@ -33,7 +34,7 @@ var app = new Vue({
 
             post('/meals/add', JSON.stringify(payload), function (response) {
                 self.$data.newMeal = new Meal();
-                console.log('post ', response,"Loading meals")
+                console.log('post ', response, "Loading meals")
                 self.loadMeals();
             })
         },
@@ -61,37 +62,56 @@ var app = new Vue({
         showEdit: function () {
             var self = this;
             var meal = self.$data.suggestions.filter(function (s) { return s.isActive })[0];
-            if (meal) { 
+            if (meal) {
                 self.$data.newMeal = meal;
                 self.$data.visiblePage = views.edit;
             }
         },
-        showMain: function() {
+        showMain: function () {
             this.$data.visiblePage = views.main;
         },
-        saveMeal : function(e) {
+        showHelp: function () {
+            this.$data.visiblePage = views.help;
+        },
+        saveMeal: function (e) {
             var self = this;
             e.preventDefault();
-            var payload = self.$data.newMeal;            
-            post('/meals/save', JSON.stringify(payload),function(result) {
+            var payload = self.$data.newMeal;
+            post('/meals/save', JSON.stringify(payload), function (result) {
                 console.log("Saved? ", result);
             })
             self.$data.visiblePage = views.main;
         },
-        addIngredient: function(e) {
+        addIngredient: function (e) {
             e.preventDefault();
             this.$data.newMeal.ingredients.push(new Ingredient());
             return false;
+        },
+        mealClick: function (meal) {
+            var self = this;
+            if (self.selectedMeal) {
+                meal.update(JSON.parse(JSON.stringify(self.selectedMeal)));
+            }
         }
     },
     computed: {
-        canShowEdit: function(){
+        canShowEdit: function () {
             var self = this;
-            if (self.$data.suggestions.length){
+            if (self.$data.suggestions.length) {
                 var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
                 return !meal.length == 0;
             }
             return false;
+
+        },
+        selectedMeal: function () {
+            var self = this;
+            if (self.$data.suggestions.length) {
+                var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
+                if (meal.length) {
+                    return meal[0];
+                }
+            }
 
         }
     },
@@ -112,7 +132,7 @@ function Meal(data) {
         self.name = (data.name || "");
         self.id = (data.id || "");
         self.instructions = (data.instructions || "");
-        self.ingredients = (data.ingredients || [ new Ingredient() ]);
+        self.ingredients = (data.ingredients || [new Ingredient()]);
         self.servings = (data.servings || 0);
     }
 
@@ -137,7 +157,7 @@ function MealPlan(data) {
     var self = this;
     if (data == null) { data = {} };
 
-    self.days = [ 
+    self.days = [
         new MealDay(),
         new MealDay(),
         new MealDay(),
@@ -149,7 +169,7 @@ function MealPlan(data) {
 
 }
 
-function Ingredient(data){
+function Ingredient(data) {
     var self = this;
     if (data == null) { data = {} };
 

@@ -1,10 +1,10 @@
-const mysql = require('../mysql.js');
+import mysql from "../mysql";
 
-module.exports = {
-    databaseCheck: function () {
+export default class {
+    databaseCheck() {
 
-    },
-    createDatabase: function () {
+    };
+    createDatabase() {
         var query = databaseCreation;
         mysql.query(query);
     }
