@@ -60,7 +60,7 @@
                 <div v-for="day in mealPlan.days">
                     {{ day.dayOfWeek }}
 
-                    <div class="meal" v-for="meal in day.meals" v-on:drop="mealDrop($event, meal)" v-on:dragover="$event.preventDefault()">
+                    <div class="meal" v-for="meal in day.meals" v-on:click="mealClick(meal)" v-on:drop="mealDrop($event, meal)" v-on:dragover="$event.preventDefault()">
                         {{ meal.name }}
                     </div>
                 </div>

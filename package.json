@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc; node build/main.js",
+    "start": "tsc & node build/main.js",
     "watch": "tsc -w"
   },
   "repository": {
