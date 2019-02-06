@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "outDir": "../../build/server",        
+    },
+    "include": [
+        "./**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+
+}

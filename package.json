@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": " node build/server/main.js",
-    "watch": "tsc -w"
+    "start": "tsc -p src/server && echo Server Built && tsc -p src/web && echo Web Built && node build/server/main.js",
+    "watch": "tsc -w",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,16 @@
     "express": "^4.16.4",
     "http-server": "^0.11.1",
     "mysql": "^2.16.0",
-    "vue": "^2.5.22",
     "vue-class-component": "^6.3.2"
+  },
+  "devDependencies": {
+    "css-loader": "^2.1.0",
+    "ts-loader": "^5.3.3",
+    "typescript": "^3.3.1",
+    "vue": "^2.6.2",
+    "vue-loader": "^15.6.2",
+    "vue-template-compiler": "^2.6.2",
+    "webpack": "^4.29.1",
+    "webpack-cli": "^3.2.3"
   }
 }

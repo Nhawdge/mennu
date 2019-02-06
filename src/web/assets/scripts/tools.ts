@@ -1,4 +1,6 @@
-function get(url, callback) {
+export {get, post};
+
+function get(url: string, callback: Function) {
     var request = new XMLHttpRequest();
     request.open('GET', url, true);
     request.onreadystatechange = function () {
@@ -17,7 +19,7 @@ function get(url, callback) {
     request.send();
 }
 
-function post(url, data, callback) {
+function post(url: string, data: any, callback: Function) {
     var request = new XMLHttpRequest();
     request.open('POST', url, true);
     request.setRequestHeader('Content-type', 'application/json');

@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Mennu the Meal Betrayer</title>
-    <link rel="stylesheet" href="/assets/mennu.css">
-    <script src="/web/tools.js"></script>
-    <script src="https://vuejs.org/js/vue.js"></script>
-    <script>
-        var exports = {};
-    </script>
+    <link rel="stylesheet" href="/styles/mennu.css">
+
+    <script defer src="./dist/build.js"></script>
+
+    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -18,14 +17,12 @@
         <div class="header">
             <h1>Mennu the Meal Betrayer</h1>
         </div>
-
-        <test></test>
         
         <div class="menu">
             <span v-bind:class="{ selected: visiblePage === views.main }">
                 <button v-on:click="showMain">Home</button>
             </span>
-            <span v-bind:class="{ disabled: !canShowEdit, selected: visiblePage === views.edit }" >
+            <span v-bind:class="{ disabled: !canShowEdit, selected: visiblePage === views.edit }">
                 <button v-on:click="showEdit">Edit</button>
             </span>
             <span v-bind:class="{ selected: visiblePage === views.help }">
@@ -36,7 +33,7 @@
 
         <div class="bar">
             <h2>Meal Plan</h2>
-            <div> 
+            <div>
                 <div>
                     <label> Add new Meal</label>
                     <input v-model="newMeal.name" placeholder="Name" />
@@ -65,7 +62,8 @@
                 <div v-for="day in mealPlan.days">
                     {{ day.dayOfWeek }}
 
-                    <div class="meal" v-for="meal in day.meals" v-on:click="mealClick(meal)" v-on:drop="mealDrop($event, meal)" v-on:dragover="$event.preventDefault()">
+                    <div class="meal" v-for="meal in day.meals" v-on:click="mealClick(meal)" v-on:drop="mealDrop($event, meal)"
+                        v-on:dragover="$event.preventDefault()">
                         {{ meal.name }}
                     </div>
                 </div>
@@ -116,7 +114,6 @@
             </div>
         </div>
     </div>
-    <script src="/web/app.js"></script>
 </body>
 
 </html>

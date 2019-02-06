@@ -12,12 +12,15 @@ export default class {
     const app: express.Application = express();
 
     app.get('/', function (req: Request, res: any) {
-      res.sendFile("src/index.html", { root: '.' });
+      res.sendFile("src/web/views/index.html", { root: '.' });
     })
  
     app.use(express.static("src/web/templates"))
-    app.use("/assets/", express.static("src/web/assets"))
-    app.use("/web", express.static("build/web"))
+    app.use("/views/", express.static("src/web/views"))
+    app.use("/scripts", express.static("build/web"))
+    app.use("/dist", express.static("dist"))
+    app.use("/styles/", express.static("src/web/assets/styles"))
+    app.use("/images/", express.static("src/web/assets/images"))
 
     app.listen(3000, function () {
       console.log(`Server has started at http://${hostname}:${port} `);
