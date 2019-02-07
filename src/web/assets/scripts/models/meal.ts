@@ -1,4 +1,7 @@
 export default class Meal {
+    /** 
+    * Creates a new Meal
+    */
     constructor(data?: object) {
     }
 

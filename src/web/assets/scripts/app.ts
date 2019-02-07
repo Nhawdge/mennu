@@ -7,29 +7,19 @@ var views = {
 import Vue from "vue";
 import Meal from './models/meal.js'
 import MealPlan from './models/mealplan.js'
-import {get, post} from './tools.js'
-
-// el: "#app",
-// template: `
-// <div>
-// <div>Hello {{name}}!</div>
-// Name: <input v-model="name" type="text">
-// </div>`,
-// data: {
-//     name: "World"
-// }
-// });
-
+import Ingredient from './models/ingredient.js'
+import { get, post } from './tools.js'
+import MealDay from "./models/mealday.js";
 
 let mainApp = new Vue({
     el: '#meal-planner',
     data: {
-        suggestions: [],
-        showAdd: false,
-        newMeal: new Meal(),
-        mealPlan: new MealPlan(),
-        visiblePage: views.main, 
-        views: views,
+        suggestions: [] as Array<Meal>,
+        showAdd: false as boolean,
+        newMeal: new Meal() as Meal,
+        mealPlan: new MealPlan() as MealPlan,
+        visiblePage: views.main as string,
+        views: views as object,
     },
     methods: {
         loadMeals: function () {
@@ -109,6 +99,19 @@ let mainApp = new Vue({
             if (self.selectedMeal) {
                 meal.update(JSON.parse(JSON.stringify(self.selectedMeal)));
             }
+        },
+        buildWeek: function () {
+            var self = this;
+            console.log(self.$data.mealPlan);
+            self.$data.mealPlan.days.push(
+                new MealDay("Sunday"),
+                new MealDay("Monday"),
+                new MealDay("Tuesday"),
+                new MealDay("Wednesday"),
+                new MealDay("Thursday"),
+                new MealDay("Friday"),
+                new MealDay("Saturday"),
+                );
         }
     },
     computed: {
@@ -134,6 +137,7 @@ let mainApp = new Vue({
     },
     created: function () {
         this.loadMeals();
+        this.buildWeek();
     }
 });
 
