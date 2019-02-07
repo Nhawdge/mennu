@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc -p src/server && echo Server Built && tsc -p src/web && echo Web Built && node build/server/main.js",
-    "watch": "tsc -w",
-    "build": "webpack"
+    "start": "node build/server/main.js",
+    "watch": "fix me",
+    "build:tsc": "tsc -p src/server && echo Server Built && tsc -p src/web && echo Web Built",
+    "build:web": "webpack"
   },
   "repository": {
     "type": "git",

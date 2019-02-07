@@ -22,7 +22,7 @@ let mainApp = new Vue({
         views: views as object,
     },
     methods: {
-        loadMeals: function () {
+        loadMeals: function (): void {
             var self = this;
             console.log('loading meals');
             get('/meals', function (response) {
@@ -31,11 +31,11 @@ let mainApp = new Vue({
                 })
             });
         },
-        toggleShowAdd: function () {
+        toggleShowAdd: function (): void {
             var self = this;
             self.$data.showAdd = !self.$data.showAdd;
         },
-        addNewMeal: function () {
+        addNewMeal: function (): void {
             var self = this;
             var payload = { name: this.$data.newMeal.name };
 
@@ -45,7 +45,7 @@ let mainApp = new Vue({
                 self.loadMeals();
             })
         },
-        makeActive: function (meal) {
+        makeActive: function (meal: Meal): void {
             var self = this;
 
             if (meal.isActive) {
@@ -58,15 +58,16 @@ let mainApp = new Vue({
                 meal.isActive = true;
             }
         },
-        dragStart: function (evt, meal) {
+        dragStart: function (evt: DragEvent, meal: Meal): void {
             evt.dataTransfer.setData('application/json', JSON.stringify(meal))
         },
-        mealDrop: function (evt, meal) {
+        mealDrop: function (evt: DragEvent, meal: Meal): void {
             var data = evt.dataTransfer.getData('application/json');
             var newMeal = JSON.parse(data);
             meal.update(newMeal);
+            console.log(meal);
         },
-        showEdit: function () {
+        showEdit: function (): void {
             var self = this;
             var meal = self.$data.suggestions.filter(function (s) { return s.isActive })[0];
             if (meal) {
@@ -74,13 +75,13 @@ let mainApp = new Vue({
                 self.$data.visiblePage = views.edit;
             }
         },
-        showMain: function () {
+        showMain: function (): void {
             this.$data.visiblePage = views.main;
         },
-        showHelp: function () {
+        showHelp: function (): void {
             this.$data.visiblePage = views.help;
         },
-        saveMeal: function (e) {
+        saveMeal: function (e: Event): void {
             var self = this;
             e.preventDefault();
             var payload = self.$data.newMeal;
@@ -89,18 +90,18 @@ let mainApp = new Vue({
             })
             self.$data.visiblePage = views.main;
         },
-        addIngredient: function (e) {
+        addIngredient: function (e: Event): boolean {
             e.preventDefault();
             this.$data.newMeal.ingredients.push(new Ingredient());
             return false;
         },
-        mealClick: function (meal) {
+        mealClick: function (meal: Meal): void {
             var self = this;
             if (self.selectedMeal) {
                 meal.update(JSON.parse(JSON.stringify(self.selectedMeal)));
             }
         },
-        buildWeek: function () {
+        buildWeek: function (): void {
             var self = this;
             console.log(self.$data.mealPlan);
             self.$data.mealPlan.days.push(
@@ -111,20 +112,20 @@ let mainApp = new Vue({
                 new MealDay("Thursday"),
                 new MealDay("Friday"),
                 new MealDay("Saturday"),
-                );
+            );
         }
     },
     computed: {
-        canShowEdit: function () {
+        canShowEdit: function (): boolean {
             var self = this;
             if (self.$data.suggestions.length) {
                 var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
-                return false// !meal.length == 0;
+                return !(meal.length == 0);
             }
             return false;
 
         },
-        selectedMeal: function () {
+        selectedMeal: function (): Meal {
             var self = this;
             if (self.$data.suggestions.length) {
                 var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
@@ -132,10 +133,10 @@ let mainApp = new Vue({
                     return meal[0];
                 }
             }
-
+            return null;
         }
     },
-    created: function () {
+    created: function (): void {
         this.loadMeals();
         this.buildWeek();
     }
