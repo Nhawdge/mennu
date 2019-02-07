@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {        
+        "outDir": "../../build/web/",
+        "experimentalDecorators": true,
+        "module": "es2015",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "sourceMap": true,
+        // "strict": true,
+        "noImplicitReturns": true,
+        "target": "es5"
+    },
+    "include": [
+        "./**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+
+}

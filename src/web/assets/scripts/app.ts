@@ -4,18 +4,25 @@ var views = {
     help: 'help'
 }
 
-var app = new Vue({
+import Vue from "vue";
+import Meal from './models/meal.js'
+import MealPlan from './models/mealplan.js'
+import Ingredient from './models/ingredient.js'
+import { get, post } from './tools.js'
+import MealDay from "./models/mealday.js";
+
+let mainApp = new Vue({
     el: '#meal-planner',
     data: {
-        suggestions: [],
-        showAdd: false,
-        newMeal: new Meal(),
-        mealPlan: new MealPlan(),
-        visiblePage: views.main,
-        views: views,
+        suggestions: [] as Array<Meal>,
+        showAdd: false as boolean,
+        newMeal: new Meal() as Meal,
+        mealPlan: new MealPlan() as MealPlan,
+        visiblePage: views.main as string,
+        views: views as object,
     },
     methods: {
-        loadMeals: function () {
+        loadMeals: function (): void {
             var self = this;
             console.log('loading meals');
             get('/meals', function (response) {
@@ -24,11 +31,11 @@ var app = new Vue({
                 })
             });
         },
-        toggleShowAdd: function () {
+        toggleShowAdd: function (): void {
             var self = this;
             self.$data.showAdd = !self.$data.showAdd;
         },
-        addNewMeal: function () {
+        addNewMeal: function (): void {
             var self = this;
             var payload = { name: this.$data.newMeal.name };
 
@@ -38,7 +45,7 @@ var app = new Vue({
                 self.loadMeals();
             })
         },
-        makeActive: function (meal) {
+        makeActive: function (meal: Meal): void {
             var self = this;
 
             if (meal.isActive) {
@@ -51,15 +58,16 @@ var app = new Vue({
                 meal.isActive = true;
             }
         },
-        dragStart: function (evt, meal) {
+        dragStart: function (evt: DragEvent, meal: Meal): void {
             evt.dataTransfer.setData('application/json', JSON.stringify(meal))
         },
-        mealDrop: function (evt, meal) {
+        mealDrop: function (evt: DragEvent, meal: Meal): void {
             var data = evt.dataTransfer.getData('application/json');
             var newMeal = JSON.parse(data);
             meal.update(newMeal);
+            console.log(meal);
         },
-        showEdit: function () {
+        showEdit: function (): void {
             var self = this;
             var meal = self.$data.suggestions.filter(function (s) { return s.isActive })[0];
             if (meal) {
@@ -67,13 +75,13 @@ var app = new Vue({
                 self.$data.visiblePage = views.edit;
             }
         },
-        showMain: function () {
+        showMain: function (): void {
             this.$data.visiblePage = views.main;
         },
-        showHelp: function () {
+        showHelp: function (): void {
             this.$data.visiblePage = views.help;
         },
-        saveMeal: function (e) {
+        saveMeal: function (e: Event): void {
             var self = this;
             e.preventDefault();
             var payload = self.$data.newMeal;
@@ -82,29 +90,42 @@ var app = new Vue({
             })
             self.$data.visiblePage = views.main;
         },
-        addIngredient: function (e) {
+        addIngredient: function (e: Event): boolean {
             e.preventDefault();
             this.$data.newMeal.ingredients.push(new Ingredient());
             return false;
         },
-        mealClick: function (meal) {
+        mealClick: function (meal: Meal): void {
             var self = this;
             if (self.selectedMeal) {
                 meal.update(JSON.parse(JSON.stringify(self.selectedMeal)));
             }
+        },
+        buildWeek: function (): void {
+            var self = this;
+            console.log(self.$data.mealPlan);
+            self.$data.mealPlan.days.push(
+                new MealDay("Sunday"),
+                new MealDay("Monday"),
+                new MealDay("Tuesday"),
+                new MealDay("Wednesday"),
+                new MealDay("Thursday"),
+                new MealDay("Friday"),
+                new MealDay("Saturday"),
+            );
         }
     },
     computed: {
-        canShowEdit: function () {
+        canShowEdit: function (): boolean {
             var self = this;
             if (self.$data.suggestions.length) {
                 var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
-                return !meal.length == 0;
+                return !(meal.length == 0);
             }
             return false;
 
         },
-        selectedMeal: function () {
+        selectedMeal: function (): Meal {
             var self = this;
             if (self.$data.suggestions.length) {
                 var meal = self.$data.suggestions.filter(function (s) { return s.isActive })
@@ -112,67 +133,12 @@ var app = new Vue({
                     return meal[0];
                 }
             }
-
+            return null;
         }
     },
-    created: function () {
+    created: function (): void {
         this.loadMeals();
+        this.buildWeek();
     }
-})
+});
 
-
-
-function Meal(data) {
-    var self = this;
-    if (data == null) { data = {} }
-
-    self.isActive = false;
-
-    self.update = function (data) {
-        self.name = (data.name || "");
-        self.id = (data.id || "");
-        self.instructions = (data.instructions || "");
-        self.ingredients = (data.ingredients || [new Ingredient()]);
-        self.servings = (data.servings || 0);
-    }
-
-    self.update(data);
-}
-
-function MealDay(data) {
-    var self = this;
-    if (data == null) { data = {} }
-
-    self.dayOfWeek = 'Sunday';
-
-    self.meals = [
-        new Meal(),
-        new Meal(),
-        new Meal()
-    ]
-
-}
-
-function MealPlan(data) {
-    var self = this;
-    if (data == null) { data = {} };
-
-    self.days = [
-        new MealDay(),
-        new MealDay(),
-        new MealDay(),
-        new MealDay(),
-        new MealDay(),
-        new MealDay(),
-        new MealDay(),
-    ];
-
-}
-
-function Ingredient(data) {
-    var self = this;
-    if (data == null) { data = {} };
-
-    self.name = "test";
-    self.amount = 0;
-}

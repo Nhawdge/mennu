@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
-        "outDir": "build",
+        "outDir": "../../build/server",        
     },
     "include": [
-        "src/**/*"
+        "./**/*"
     ],
     "exclude": [
         "node_modules"

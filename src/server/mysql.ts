@@ -18,10 +18,9 @@ export default class {
             con.query(query, function (err, result, fields) {
                 if (err) throw err;
                 if (callback) {
-                    return callback(JSON.stringify(result));
+                    return callback(result);
                 }
             });
         });
     };
-
 }

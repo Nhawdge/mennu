@@ -63,3 +63,6 @@ typings/
 #### Mennu specific stuff
 
 build
+
+## Tyler thinks I should ignore this folder.
+.vscode
