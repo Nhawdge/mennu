@@ -1,17 +1,34 @@
-// import Vue from 'vue'
-// import Component from 'vue-class-component'
+import Vue from "vue";
 
-// // The @Component decorator indicates the class is a Vue component
-// @Component({
-//   // All component options are allowed in here
-//   template: '<button @click="onClick">Click!</button>'
-// })
-// export default class MyComponent extends Vue {
-//   // Initial data can be declared as instance properties
-//   message: string = 'Hello!'
-
-//   // Component methods can be declared as instance methods
-//   onClick (): void {
-//     window.alert(this.message)
-//   }
-// }
+export default Vue.extend({
+    template: `<div id="menu" class="menu">
+    <span v-bind:class="{ selected: visiblePage === views.main }">
+        <button v-on:click="changeMenu('main')">Home</button>
+    </span>
+    <span v-bind:class="{ disabled: false, selected: visiblePage === views.edit }">
+        <button v-on:click="changeMenu('edit')">Edit</button>
+    </span>
+    <span v-bind:class="{ selected: visiblePage === views.help }">
+        <button v-on:click="changeMenu('help')">Help!</button>
+    </span>
+    </div>`,
+    data() {
+        return {
+            views: {
+                main: 'main',
+                edit: 'edit',
+                help: 'help'
+            } as object,
+            visiblePage: "main" as string
+        }
+    },
+    methods: {
+        changeMenu: function (newMenu):void {
+            this.$data.visiblePage = newMenu;
+            this.$emit('change-menu', newMenu);
+        }
+    },
+    created: function() :void {
+        this.changeMenu(this.$data.views.main);
+    }
+});

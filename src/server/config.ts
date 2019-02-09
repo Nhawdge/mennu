@@ -1,8 +1,9 @@
 export class schema {
     static table = {
-        meal: "meal",
-        ingredient: 'ingredient',
-        mealingredient: 'mealingredients'
+        meal: "meals",
+        ingredient: 'ingredients',
+        mealingredient: 'mealingredients',
+        mealplans: 'mealplans'
     };
     static dev: {};
     static prod: {};

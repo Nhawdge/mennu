@@ -33,9 +33,13 @@ export default class {
         })
       }
       if (method == 'POST' && endpoint == 'add') {
-          api.meals.add(req.body, function (data) {
-            res.json(data);
-          })
+        api.meals.add(req.body, function (data) {
+          res.json(data);
+        })
+      } if (method == 'POST' && endpoint == 'save') {
+        api.meals.edit(req.body, function (data) {
+          res.json(data);
+        })
       }
 
     })

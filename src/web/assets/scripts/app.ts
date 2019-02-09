@@ -1,4 +1,4 @@
-var views = {
+var views: object = {
     main: 'main',
     edit: 'edit',
     help: 'help'
@@ -21,6 +21,8 @@ let mainApp = new Vue({
         visiblePage: views.main as string,
         views: views as object,
     },
+    components: {
+    },
     methods: {
         loadMeals: function (): void {
             var self = this;
@@ -41,7 +43,6 @@ let mainApp = new Vue({
 
             post('/meals/add', JSON.stringify(payload), function (response) {
                 self.$data.newMeal = new Meal();
-                console.log('post ', response, "Loading meals")
                 self.loadMeals();
             })
         },
@@ -65,7 +66,6 @@ let mainApp = new Vue({
             var data = evt.dataTransfer.getData('application/json');
             var newMeal = JSON.parse(data);
             meal.update(newMeal);
-            console.log(meal);
         },
         showEdit: function (): void {
             var self = this;
@@ -85,7 +85,7 @@ let mainApp = new Vue({
             var self = this;
             e.preventDefault();
             var payload = self.$data.newMeal;
-            post('/meals/save', JSON.stringify(payload), function (result) {
+            post('/meals/save', JSON.stringify(payload), function (result): void {
                 console.log("Saved? ", result);
             })
             self.$data.visiblePage = views.main;
@@ -113,6 +113,10 @@ let mainApp = new Vue({
                 new MealDay("Friday"),
                 new MealDay("Saturday"),
             );
+        },
+        menuChange: function (screen): void {
+            this.$data.visiblePage = views[screen];
+
         }
     },
     computed: {
@@ -123,7 +127,6 @@ let mainApp = new Vue({
                 return !(meal.length == 0);
             }
             return false;
-
         },
         selectedMeal: function (): Meal {
             var self = this;

@@ -16,7 +16,11 @@ export default class {
         con.connect(function (err) {
             if (err) throw err;
             con.query(query, function (err, result, fields) {
-                if (err) throw err;
+                if (err){
+                    console.error(err);
+                    throw err;
+                } 
+                    
                 if (callback) {
                     return callback(result);
                 }

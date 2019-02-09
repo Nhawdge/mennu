@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "outDir": "../../build/server",        
+        "sourceMap": true
     },
     "include": [
         "./**/*"

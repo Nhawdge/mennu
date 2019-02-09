@@ -1,6 +1,6 @@
-import { meals } from "./tables/meal";
+import { meals } from "./tables/meals";
 import { ingredients } from "./tables/ingredient";
-import { plans } from "./tables/plan";
+import { plans } from "./tables/plans";
 
 export class api {
     static meals = meals;

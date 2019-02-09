@@ -1,4 +1,4 @@
-import  "../mysql";
+import "../mysql";
 import { schema } from "../config";
 import tools from "../tools";
 import mysql from "../mysql";
@@ -27,35 +27,35 @@ export class meals {
         var query =
             `START TRANSACTION;
          
-        UPDATE \`${schema.table.meal}\` 
-        SET 
-         \`id\` = '${meal.id}',
-         \`name\` = '${meal.name}',
-         \`servings\` = '${meal.servings}',
-         \`instructions\` = '${meal.instructions}'
-         WHERE \`id\` = '${meal.id}';
+        UPDATE ${schema.table.meal}
+        SET         
+         name = '${meal.name}',
+         servings = '${meal.servings}',
+         instructions = '${meal.instructions}'
+         WHERE id = '${meal.id}';
          `;
 
-        for (let ingredient of meal.ingredients) {
-            var guid = tools.guid();
-            query += `
-            INSERT INTO \`${schema.table.ingredient}\`
+        if (meal.ingredients) {
+            for (let ingredient of meal.ingredients) {
+                var guid = tools.guid();
+                query += `
+            INSERT INTO ${schema.table.ingredient}
             (
-                \`id\`,
-                \`name\`
+                id,
+                name
             )
             VALUES(
                 '${guid}',
                 '${ingredient.name}'
             );`
 
-            query += `
+                query += `
             INSERT INTO \`${schema.table.mealingredient}\`
             (
-                \`id\`,
-                \`mealId\`,
-                \`ingredientId\`,
-                \`amount\`
+                id,
+                mealId,
+                ingredientId,
+                amount
                 )
                 VALUES(
                     '${tools.guid()}',
@@ -64,12 +64,12 @@ export class meals {
                     '${ingredient.amount}'            
                 );
                 `;
-
+            }
         }
         query += '\nCOMMIT;'
 
         console.log("Query would be\n", query);
-        //mysql.query(query);
+        mysql.query(query);
     };
-    static delete () { };
+    static delete() { };
 }

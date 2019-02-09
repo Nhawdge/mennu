@@ -1,0 +1,13 @@
+<template id="menu">
+    <div class="menu">
+        <span v-bind:class="{ selected: visiblePage === views.main }">
+            <button v-on:click="changeMenu('main')">Home</button>
+        </span>
+        <span v-bind:class="{ disabled: false, selected: visiblePage === views.edit }">
+            <button v-on:click="changeMenu('edit')">Edit</button>
+        </span>
+        <span v-bind:class="{ selected: visiblePage === views.help }">
+            <button v-on:click="$emit('changeMenu')">Help!</button>
+        </span>
+    </div>
+</template>
