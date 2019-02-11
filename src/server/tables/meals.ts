@@ -2,6 +2,7 @@ import "../mysql";
 import { schema } from "../config";
 import tools from "../tools";
 import mysql from "../mysql";
+import meal from '../models/meal'
 
 export class meals {
     static getAll(callback) {

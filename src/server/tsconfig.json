@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
         "outDir": "../../build/server",        
-        "sourceMap": true
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "target": "es5"
     },
     "include": [
         "./**/*"
