@@ -1,52 +1,40 @@
 import ITable from "../interfaces/itable";
 import { schema } from "../config";
 import column from "../decorators/column";
+import Table from "./table";
+import { ingredients } from "../tables/ingredient";
 
-export default class Meal implements ITable {
+export default class Meal extends Table {
+
+    /**
+     * Builds a new meal
+     */
+    constructor() {
+        super();
+        this.columns.push("id", "name", "isActive", "instructions", "servings");
+        this.foreignKeys.push({
+            key: "id" as string,
+            table: "ingredients" as string,
+            foreignKey: "mealId"
+        })
+    }
+
     /** Guid */
     @column
-    public id: string; 
+    public id: string;
 
     /** Meal or Recipe name */
-    @column
     name: string;
 
     /** Is Active */
-    @column
     isActive: boolean;
 
     /** Recipe directions */
-    @column
     instructions: string;
 
     /** Foreign Key */
-    @column
     ingredients: Array<any>;
 
     /** How many people this will feed. */
-    @column
     servings: number;
-
-    columns: Array<any> = new Array<any>();
-
-    toSelect(): string {
-        var query = `
-        SELECT * FROM ${schema.table.meal}
-        `
-        return query;
-    }
-
-    toAdd():string {
-        var query = `
-        INSERT INTO ${schema.table.meal}
-
-        `
-        return ""
-    }
-    toDelete():string {
-        return "";
-    }
-    toUpdate():string {
-        return "";
-    }
 }
