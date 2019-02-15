@@ -2,7 +2,7 @@ import { schema } from "../config";
 import ITable from "../interfaces/itable";
 
 export default abstract class Table implements ITable {
-    columns: Array<string> = new Array<string>();
+    columns: Array<string> = schema.table.meal.columns;
     foreignKeys: Array<object> = new Array<object>();
 
     /** 
@@ -11,11 +11,30 @@ export default abstract class Table implements ITable {
      */
     toSelect(): string {
         var query = `
-        SELECT * FROM ${schema.table.meal}
+        SELECT * FROM ${schema.table.meal.tableName}
         `
+        if (schema.table.meal.foreignKey) {
+            query += `JOIN `
+        }
         return query;
     }
-    /** Returns a string of the query for INSERT INTO */
+    /**
+     * Generates a statement to select all rows
+     * @returns SQL String
+     */
+    static toSelectAll(): string {
+        var query = `
+        SELECT * FROM ${schema.table.meal.tableName}
+        `
+        if (schema.table.meal.foreignKey) {
+            query += `JOIN `
+        }
+        return query;
+    }
+    /**
+     * Generates SQL needed for insert
+     * @returns a string of the query for INSERT INTO 
+     */ 
     toAdd(): string {
         var keys: string = this.columns.map(k => `\`${k}\``).join(",\n")
         var values: string = this.columns.map(k => {
@@ -26,7 +45,7 @@ export default abstract class Table implements ITable {
 
         var query = `
         
-        INSERT INTO ${schema.table.meal}
+        INSERT INTO ${schema.table.meal.tableName}
         (
             ${keys}
         )

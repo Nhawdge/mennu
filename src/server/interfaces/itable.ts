@@ -1,6 +1,6 @@
 export default interface ITable {
-    toSelect(table: ITable): string;
-    toAdd(): string;
-    toUpdate(): string;
-    toDelete(): string;
+    // toSelect(): string;
+    // toAdd(): string;
+    // toUpdate(): string;
+    // toDelete(): string;
 }

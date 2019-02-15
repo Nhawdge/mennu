@@ -1,13 +1,13 @@
-import ITable from "../interfaces/itable";
-import "reflect-metadata"
+import { schema } from "../config";
 
-export default function column(target: ITable, key: string) {
-    console.log("Decorator", this, target, key);
-    var obj = Object.defineProperty(target, "columns", { value: [key] })
-    obj.prototype = target.prototype;
-    return obj;
+export function column(target: any, key: string) {
+    schema.table.meal.columns.push(key);
 }
 
-// const key = (target: any, key: string) => {
-//     console.log("key", this, key);
-// }
+export function key(target: any, key: string) {
+    schema.table.meal.key.push(key);
+}
+
+export function foreignKey(target: any, key: string) {
+    schema.table.meal.foreignKey.push(key);
+}
