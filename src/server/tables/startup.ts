@@ -6,7 +6,7 @@ export default class {
     };
     createDatabase() {
         var query = databaseCreation;
-        mysql.query(query);
+        //mysql.query(query);
     }
 }
 

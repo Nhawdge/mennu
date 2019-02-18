@@ -23,23 +23,24 @@ export default class {
     app.use("/images/", express.static("src/web/assets/images"))
 
     app.use(express.json());
-    app.all('/meals/:method?', function (req, res) {
+    app.all('/meals/:method?', function (req, res) { 
       var method = req.method
       var endpoint = (req.params.method || 'getAll');
       console.log(`${method} request to ${endpoint}`);
       if (method == 'GET' && endpoint == 'getAll') {
-        api.meals.getAll(function (data) {
+        api.database.query(api.meals.toSelectAll(), function (data) {
           res.json(data);
-        })
+        });
       }
       if (method == 'POST' && endpoint == 'add') {
-        api.meals.add(req.body, function (data) {
-          res.json(data);
-        })
-      } if (method == 'POST' && endpoint == 'save') {
-        api.meals.edit(req.body, function (data) {
-          res.json(data);
-        })
+        // api.meals.add(req.body, function (data) {
+        //   res.json(data);
+        // })
+      } 
+      if (method == 'POST' && endpoint == 'save') {
+        // api.meals.edit(req.body, function (data) {
+        //   res.json(data);
+        // })
       }
 
     })
@@ -53,83 +54,3 @@ export default class {
     this.server();
   };
 }
-
-  // static server() {
-  //   return http.createServer((req, res) => {
-  //     console.log(req.method, "Request from:", req.url);
-
-  //     res.statusCode = 200;
-  //     var apiCall = router(req.url);
-
-  //     if (req.method == 'GET') {
-  //       apiCall(function (result) {
-  //         res.end(result)
-  //       })
-  //     }
-  //     else if (req.method == 'POST') {
-  //       console.log(`'${req.data}'`);
-  //       var body = "";
-
-  //       req.on('data', function (data) {
-  //         body += data;
-  //       });
-
-  //       req.on('end', function (data) {
-  //         if (data) {
-  //           body += data;
-  //         }
-
-  //         console.log("body is: ", body);
-  //         apiCall(JSON.parse(body), function (result) {
-  //           res.end(result)
-  //         })
-  //       });
-  //     }
-  //   });
-  // };
-  // static start() {
-  //   this.server().listen(port, hostname, () => {
-  //     console.log(`Server running at http://${hostname}:${port}/`);
-  //   });
-  // }
-
-// function router(path): Function {
-//   switch (path) {
-//     case '/meals':
-//       return api.meals.getAll;
-//       break;
-//     case '/meals/add':
-//       return api.meals.add;
-//       break;
-//     case '/meals/save':
-//       return api.meals.edit;
-//       break;
-//     case '/ingredients':
-//       return api.ingredients.getAll;
-//       break;
-//     default:
-//       return serveHtml(path);
-//       break;
-//   }
-// }
-
-// function serveHtml(path) {
-//   return function (callback) {
-//     if (path == '/') { path = '/index.html' }
-//     path = "./src" + path;
-//     if (!fs.existsSync(path)) {
-//       path.replace("./src", "./build");
-//     }
-
-//     fs.readFile(path, "utf8", function (err, data) {
-//       if (data) {
-//         callback(data);
-//       }
-//       else {
-
-//         callback("File not found")
-//         console.warn("File not found");
-//       }
-//     })
-//   }
-// }

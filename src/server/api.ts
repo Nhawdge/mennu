@@ -1,9 +1,9 @@
-import { meals } from "./tables/meals";
-import { ingredients } from "./tables/ingredient";
-import { plans } from "./tables/plans";
+import Meal from "./models/meal";
+import mysql from "./mysql";
 
 export class api {
-    static meals = meals;
-    static ingredients = ingredients;
-    static plans = plans;
+    static meals = Meal;
+    static database = mysql;
+    // static ingredients = ingredients;
+    // static plans = plans;
 }

@@ -17,7 +17,7 @@ export class meals {
             (\`id\`, \`name\`)
             VALUES
             ('${tools.guid()}', '${meal.name}' )`;
-        mysql.query(query);
+        //mysql.query(query);
         callback(JSON.stringify({ isSucess: true }));
     };
 
@@ -70,7 +70,7 @@ export class meals {
         query += '\nCOMMIT;'
 
         console.log("Query would be\n", query);
-        mysql.query(query);
+        //mysql.query(query);
     };
     static delete() { };
 }

@@ -7,7 +7,7 @@ m.id ="test";
 m.name = "test";
 console.log(m);
 console.log(schema.table);
-console.log(m.toAdd());
+console.log(m.toSelect());
 
 
 //server.default.start(); 

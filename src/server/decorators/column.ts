@@ -9,5 +9,5 @@ export function key(target: any, key: string) {
 }
 
 export function foreignKey(target: any, key: string) {
-    schema.table.meal.foreignKey.push(key);
+    schema.table.meal.foreignKeys.push(key);
 }

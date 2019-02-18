@@ -1,11 +1,10 @@
-import ITable from "../interfaces/itable";
-import { schema } from "../config";
-import { column, foreignKey } from "../decorators/column";
+import { column, foreignKey, key } from "../decorators/column";
 import Table from "./table";
-import { ingredients } from "../tables/ingredient";
+import Ingredient from "./ingredient";
+import { schema } from "../config";
 
 export default class Meal extends Table {
-
+    tableName:string = schema.table.meal.tableName;
     /**
      * Builds a new meal
      */
@@ -15,6 +14,7 @@ export default class Meal extends Table {
 
     /** Guid */
     @column
+    @key
     public id: string;
 
     /** Meal or Recipe name */
@@ -31,7 +31,7 @@ export default class Meal extends Table {
 
     /** Foreign Key */
     @foreignKey
-    ingredients: Array<ingredients>;
+    ingredients: Array<Ingredient>;
 
     /** How many people this will feed. */
     @column

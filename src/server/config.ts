@@ -4,27 +4,35 @@ export class schema {
             tableName: "meals",
             key: [],
             columns: [],
-            foreignKey: []
+            foreignKeys: []
         },
         ingredient: {
             tableName: "ingredients",
             key: [],
             columns: [],
-            foreignKey: []
+            foreignKeys: []
         },
         mealingredient: {
             tableName: "mealingredients",
             key: [],
             columns: [],
-            foreignKey: []
+            foreignKeys: []
         },
         mealplans: {
             tableName: "mealplans",
             key: [],
             columns: [],
-            foreignKey: []
+            foreignKeys: []
         }
     };
+    static enums: {
+        relationships: {
+            OneToOne: 1,
+            OneToMany: 2,
+            ManyToMany: 3
+        }       
+
+    }
     static dev: {};
     static prod: {};
 
