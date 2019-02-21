@@ -1,4 +1,8 @@
 import { schema } from "../config";
+import mysql from "../mysql";
+import Meal from "./meal";
+import { resolve } from "url";
+import { AnyARecord } from "dns";
 
 export default abstract class Table {
     columns: Array<string> = schema.table.meal.columns;
@@ -10,16 +14,37 @@ export default abstract class Table {
      * @param id Optional ID to "where" with;
      * @returns SQL string
      */
-    toSelect(id?: string): string {
+    GetAll(): Array<Table> {
         var query = `
         SELECT * FROM ${schema.table.meal.tableName}
         `
-        if (schema.table.meal.foreignKeys) {
-            for (let fk of schema.table.meal.foreignKeys) {
-                query += `JOIN ${schema.table[fk]} on ${schema.table.meal.key[0]} = ${fk}.id`
+        var meals: Array<Table>;
+        var results:any;
+
+        mysql.query(query).then((result: Array<any>)=> {
+            console.log(result);
+            results = result.map(function (meal) {
+                return new Meal(meal);
+            })
+
+        }).then(() => {
+            if (!this.foreignKeys) {
+                return;
             }
-        }
-        return query;
+            console.log(results);
+            for (let row of results) {
+
+                for (let fk of this.foreignKeys) {
+                    query = `SELECT * FROM ${fk} 
+                    JOIN ${schema.foreignKeys[this.tableName][fk]}`
+
+                    //query db and update property
+
+                }
+            }
+
+        }).catch(error => console.error(error));
+        return new Array<Table>();
     }
     /**
      * Get Related data
@@ -36,14 +61,8 @@ export default abstract class Table {
      * Generates a statement to select all rows
      * @returns SQL String 
      */
-    static toSelectAll(): string {
-        var query = `
-        SELECT * FROM ${schema.table.meal.tableName}
-        `
-        if (schema.table.meal.foreignKeys) {
-            query += `JOIN `
-        }
-        return query;
+    toSelectAll(): Array<Table> {
+        throw "Not implemented";
     }
     /**
      * Generates SQL needed for insert

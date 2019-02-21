@@ -2,16 +2,17 @@
 //const fs = require('fs');
 
 const hostname = '127.0.0.1';
-const port = 3000;
+const port = 3000; 
 
-import express = require("express");
+//import * as express from "express";
+var express = require('express');
 import { api } from "./api";
-
+ 
 export default class {
   static server() {
-    const app: express.Application = express();
+    const app:any = express();
 
-    app.get('/', function (req: Request, res: any) {
+    app.get('/', function (req: any, res: any) {
       res.sendFile("src/web/views/index.html", { root: '.' });
     })
 
@@ -28,9 +29,9 @@ export default class {
       var endpoint = (req.params.method || 'getAll');
       console.log(`${method} request to ${endpoint}`);
       if (method == 'GET' && endpoint == 'getAll') {
-        api.database.query(api.meals.toSelectAll(), function (data) {
-          res.json(data);
-        });
+        // api.database.query(api.meals.toSelectAll(), function (data) {
+        //   res.json(data);
+        // });
       }
       if (method == 'POST' && endpoint == 'add') {
         // api.meals.add(req.body, function (data) {

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node build/server/main.js",
-    "watch": "tsc -w -p src/server | tsc -w -p src/web | webpack -w &",
+    "watch:serv": "tsc -w -p src/server ",
+    "watch:web": "tsc -w -p src/web | webpack -w &",
     "build:tsc": "tsc -p src/server && echo Server Built && tsc -p src/web && echo Web Built",
     "build:web": "webpack"
   },
@@ -22,7 +23,6 @@
   "dependencies": {
     "@types/node": "^10.12.18",
     "commonjs": "0.0.1",
-    "express": "^4.16.4",
     "http-server": "^0.11.1",
     "mysql": "^2.16.0",
     "reflect-metadata": "^0.1.13",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "css-loader": "^2.1.0",
+    "express": "^4.16.4",
     "ts-loader": "^5.3.3",
     "typescript": "^3.3.1",
     "vue": "^2.6.2",

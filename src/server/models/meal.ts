@@ -4,12 +4,20 @@ import Ingredient from "./ingredient";
 import { schema } from "../config";
 
 export default class Meal extends Table {
-    tableName:string = schema.table.meal.tableName;
+    tableName: string = schema.table.meal.tableName;
     /**
      * Builds a new meal
      */
-    constructor() {
-        super();        
+    constructor(meal?: any) {
+        super();
+        if (meal) {
+            this.id = meal.id;
+            this.name = meal.name;
+            this.isActive = meal.isActive;
+            this.instructions = meal.instructions
+            this.servings = meal.servings;
+        }
+
     }
 
     /** Guid */

@@ -10,37 +10,18 @@ export default class {
         });
 
     };
-    static query(query: string, callback: Function) {
+    static async query(query: string):Promise<{}> {
         var con = this.connection();
 
-        con.connect(function (err) {
-            if (err) throw err;
-            con.query(query, function (err, result, fields) {
-                if (err) {
-                    console.error(err);
-                    throw err;
-                }
-                if (callback) {
-                    return callback(result);
-                }
-            });
-        });
+        return new Promise((resolve, reject) => {
+            con.connect((error) => {
+                if (error) return reject(error);
+                con.query(query, (error, result, fields) => {
+                    if (error) return reject(error);
+                    return resolve(result);
+                })
+            })
+        })
+
     };
 }
-
-
-// const query = async (query) => {
-//     var con = this.connection();
-//     return new Promise((resolve, reject) => {
-//       con.connect((err) => {
-//       if (err) return reject(err);
-//       con.query(query, (err, result, fields) => {
-//         if (err) {
-//           console.error(err);
-//           return reject(err);
-//         }
-//         return resolve(result)
-//       });
-//     });
-//     })
-//   };
