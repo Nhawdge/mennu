@@ -67,3 +67,5 @@ dist
 
 ## Tyler thinks I should ignore this folder.
 .vscode
+core/Mennu/Mennu/obj
+core/Mennu/.vs

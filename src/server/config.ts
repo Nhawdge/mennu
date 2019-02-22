@@ -1,5 +1,5 @@
-export class schema {
-    static table = {
+const schema = {
+    table: {
         meal: {
             tableName: "meals",
             key: [],
@@ -24,25 +24,27 @@ export class schema {
             columns: [],
             foreignKeys: []
         }
-    };
-    static enums: {
+    },
+    enums: {
         relationships: {
             OneToOne: 1,
             OneToMany: 2,
             ManyToMany: 3
         }
-    }
-    static foreignKeys: {
+    },
+    foreignKeys: {
         meals: {
-            ingredients: ` mealingredients on meals.id = mealingredients.mealid
-            join ingredients on mealingredients.ingredientId = ingredients.id`
+            ingredients: `JOIN mealingredients ON meals.id = mealingredients.mealid
+            JOIN ingredients ON mealingredients.ingredientId = ingredients.id`
         },
         ingredients: {
-            meals: `${schema.table.mealingredient.tableName} on ingredient.id = mealingredients.ingredientid
-            join meals on mealingredients.mealid = meal.id `as string
+            meals: `JOIN mealingredients ON ingredient.id = mealingredients.ingredientid
+            JOIN meals on mealingredients.mealid = meal.id `
         }
-    }
-    static dev: { };
-    static prod: { };
+    },
+    dev: {},
+    prod: {}
 
 }
+
+export { schema } 

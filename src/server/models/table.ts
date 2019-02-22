@@ -1,12 +1,11 @@
 import { schema } from "../config";
 import mysql from "../mysql";
 import Meal from "./meal";
-import { resolve } from "url";
-import { AnyARecord } from "dns";
+import Ingredient from "./ingredient";
 
 export default abstract class Table {
     columns: Array<string> = schema.table.meal.columns;
-    foreignKeys: Array<object> = schema.table.meal.foreignKeys;
+    foreignKeys: Array<string> = schema.table.meal.foreignKeys;
     abstract tableName: string;
 
     /** 
@@ -15,33 +14,38 @@ export default abstract class Table {
      * @returns SQL string
      */
     GetAll(): Array<Table> {
+        var self = this;
         var query = `
         SELECT * FROM ${schema.table.meal.tableName}
         `
         var meals: Array<Table>;
-        var results:any;
+        var results: any;
 
-        mysql.query(query).then((result: Array<any>)=> {
+        mysql.query(query).then((result: Array<any>) => {
             console.log(result);
             results = result.map(function (meal) {
                 return new Meal(meal);
             })
 
         }).then(() => {
-            if (!this.foreignKeys) {
+            if (!self.foreignKeys) {
                 return;
             }
             console.log(results);
             for (let row of results) {
 
-                for (let fk of this.foreignKeys) {
+                for (let fk of self.foreignKeys) {
+                    console.log(fk)
                     query = `SELECT * FROM ${fk} 
-                    JOIN ${schema.foreignKeys[this.tableName][fk]}`
+                     ${schema.foreignKeys[self.tableName][fk]}`
 
                     //query db and update property
-
+                    mysql.query(query).then((results: Array<any>) => {
+                        row[fk] = results.map(i => new Ingredient(i))
+                    })
                 }
             }
+            console.log(results);
 
         }).catch(error => console.error(error));
         return new Array<Table>();

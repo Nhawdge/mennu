@@ -3,7 +3,20 @@ import { key, column } from "../decorators/column";
 import { schema } from "../config";
 
 export default class Ingredient extends Table {
-    tableName = schema.table.ingredient.tableName;
+    tableName: string = schema.table.ingredient.tableName;
+
+    /**
+     * New ingredient
+     */
+    constructor(data?: any) {
+        super();
+        if (data) {
+            this.id = data.id;
+            this.name = data.name;
+            this.measurement = data.measurement;
+        }
+    }
+
     /**
      * Row Id
      */
@@ -16,7 +29,7 @@ export default class Ingredient extends Table {
      */
     @column
     name: string;
-    
+
     /**
      * Measurement
      */

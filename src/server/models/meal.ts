@@ -1,7 +1,7 @@
-import { column, foreignKey, key } from "../decorators/column";
 import Table from "./table";
-import Ingredient from "./ingredient";
+import { column, foreignKey, key } from "../decorators/column";
 import { schema } from "../config";
+import Ingredient from "./ingredient";
 
 export default class Meal extends Table {
     tableName: string = schema.table.meal.tableName;
