@@ -41,7 +41,7 @@ let mainApp = new Vue({
             var self = this;
             var payload = { name: this.$data.newMeal.name };
 
-            post('/meals/add', JSON.stringify(payload), function (response) {
+            post('/api/SaveMeal', JSON.stringify(payload), function (response) {
                 self.$data.newMeal = new Meal();
                 self.loadMeals();
             })
