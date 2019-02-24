@@ -27,7 +27,7 @@ let mainApp = new Vue({
         loadMeals: function (): void {
             var self = this;
             console.log('loading meals');
-            get('/meals', function (response) {
+            get('/api/GetAllMeals', function (response) {
                 self.$data.suggestions = response.map(function (r) {
                     return new Meal(r);
                 })

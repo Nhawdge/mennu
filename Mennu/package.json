@@ -4,11 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node build/server/main.js",
-    "watch:serv": "tsc -w -p src/server ",
-    "watch:web": "tsc -w -p src/web | webpack -w &",
-    "build:tsc": "tsc -p src/server && echo Server Built && tsc -p src/web && echo Web Built",
-    "build:web": "webpack"
+    "watch": "tsc -w | webpack -w",
+    "build": " tsc && webpack"
   },
   "repository": {
     "type": "git",
