@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {        
+        "outDir": "wwwroot/Assets/build/",
+        "experimentalDecorators": true,
+        "module": "es2015",
+        "moduleResolution": "node",
+        "allowJs": true,
+        "sourceMap": true,
+        // "strict": true,
+        "noImplicitReturns": true,
+        "target": "es5"
+    },
+    "include": [
+        "./wwwroot/Assets/js/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+
+}

@@ -1,0 +1,115 @@
+* {
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.body{
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 10px;
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    
+    grid-template-areas: 
+    "header header header header"
+    "menu menu menu menu"
+    "bar main main main"
+    "footer footer footer footer"
+}
+
+.header { 
+    grid-area: header;
+    text-align: center;
+}
+
+.bar { grid-area: bar; }
+
+.menu {
+     grid-area: menu; 
+     background-color: rgba(0,150,200,.3);
+     padding:15px;
+}
+
+.menu .selected button {
+    background-color: rgba(0, 0, 200, .5)
+}
+
+.main { grid-area: main; }
+
+.meal-plan {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
+
+.meal-plan div {
+    grid-column: span 1;
+}
+
+
+.meal {
+    border: solid black 2px;
+    border-radius: 3px;
+    padding: 3px;
+    margin:1px;
+    min-height: 50px;
+}
+
+/* 
+
+.meal-bar input {
+    border: solid black 2px;
+    width:95%;
+    padding: 3px;
+    margin: 3px;
+    border-radius: 3px;
+    box-sizing: border-box;
+}
+*/
+
+
+.menu button {
+    border: solid black 2px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 200, .3);
+    padding: 10px;
+    min-width: 75px;
+    font-size: 1.1rem;
+}
+
+.active {
+    background-color:rgba(0, 200, 50, .7)
+}
+
+.disabled button {
+    opacity: 0.3;
+}
+
+.meal-item {
+    border: solid black 1px;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+    width: auto;
+}
+
+form{
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto auto auto;
+    grid-auto-flow: row;
+    grid-auto-rows: 25px;
+
+}
+ 
+form label, form input, form button {
+    grid-column-start: 1;
+}
+
+form textarea {
+    grid-column-start: 1;
+    grid-row: span 3;
+} 
+
+.ingredient {
+    grid-column-start: span 1;
+} 

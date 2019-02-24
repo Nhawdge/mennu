@@ -15,5 +15,10 @@ namespace Mennu.Controllers
         {
             return View();
         }
+
+        public IActionResult GetAllMeals()
+        {
+            return Json(Services.MealService.GetMeals());
+        }
     }
 }

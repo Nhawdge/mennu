@@ -1,0 +1,9 @@
+C:\Code\mennu\core\Mennu\Data\bin\Debug\netcoreapp2.2\Data.deps.json
+C:\Code\mennu\core\Mennu\Data\bin\Debug\netcoreapp2.2\Data.dll
+C:\Code\mennu\core\Mennu\Data\bin\Debug\netcoreapp2.2\Data.pdb
+C:\Code\mennu\core\Mennu\Data\obj\Debug\netcoreapp2.2\Data.csprojAssemblyReference.cache
+C:\Code\mennu\core\Mennu\Data\obj\Debug\netcoreapp2.2\Data.csproj.CoreCompileInputs.cache
+C:\Code\mennu\core\Mennu\Data\obj\Debug\netcoreapp2.2\Data.AssemblyInfoInputs.cache
+C:\Code\mennu\core\Mennu\Data\obj\Debug\netcoreapp2.2\Data.AssemblyInfo.cs
+C:\Code\mennu\core\Mennu\Data\obj\Debug\netcoreapp2.2\Data.dll
+C:\Code\mennu\core\Mennu\Data\obj\Debug\netcoreapp2.2\Data.pdb

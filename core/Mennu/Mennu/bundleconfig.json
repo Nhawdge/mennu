@@ -2,16 +2,16 @@
 // More info at https://go.microsoft.com/fwlink/?LinkId=808241
 [
   {
-    "outputFileName": "wwwroot/css/site.min.css",
+    "outputFileName": "wwwroot/Assets/mennu.css",
     // An array of relative input file paths. Globbing patterns supported
     "inputFiles": [
-      "wwwroot/css/site.css"
+      "wwwroot/Assets/css/mennu.css"
     ]
   },
   {
-    "outputFileName": "wwwroot/js/site.min.js",
+    "outputFileName": "wwwroot/Assets/mennu.js",
     "inputFiles": [
-      "wwwroot/js/site.js"
+      "wwwroot/Assets/js/*.js"
     ],
     // Optionally specify minification options
     "minify": {
@@ -19,6 +19,6 @@
       "renameLocals": true
     },
     // Optionally generate .map file
-    "sourceMap": false
+    "sourceMap": true
   }
 ]
