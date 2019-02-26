@@ -63,6 +63,12 @@ typings/
 #### Mennu specific stuff
 
 build
+dist
+.vs
+/bin/
 
-## Tyler thinks I should ignore this folder.
 .vscode
+/core/Mennu/Mennu/obj
+/.vs/Mennu/v15/Server/sqlite3
+/Mennu/bin/
+/Mennu/obj
