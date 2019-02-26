@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Mennu.Models
+namespace Mennu.Models.Db
 {
     public partial class mennuContext : DbContext
     {

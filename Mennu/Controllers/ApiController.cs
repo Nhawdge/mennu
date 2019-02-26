@@ -23,7 +23,7 @@ namespace Mennu.Controllers
         }
         
         [HttpPost]
-        public IActionResult SaveMeal([FromBody]Meals meal)
+        public IActionResult SaveMeal([FromBody]Meal meal)
         {
 
             var response = Services.MealService.SaveMeal(meal);

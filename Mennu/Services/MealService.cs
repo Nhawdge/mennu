@@ -1,4 +1,5 @@
 ﻿using Mennu.Models;
+using Mennu.Models.Db;
 using Mennu.Utilities;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,22 @@ namespace Mennu.Services
 {
     public static class MealService
     {
-        public static IEnumerable<Meals> GetMeals()
+        public static IEnumerable<Meal> GetMeals()
         {
-            var meals = Enumerable.Empty<Meals>();
+            var meals = Enumerable.Empty<Meal>();
             try
             {
                 using (var db = new mennuContext())
                 {
-                    meals = db.Meals.ToList();
+                    meals = db.Meals.Select(x => new Meal(x)).ToList();
+
+                    foreach (var meal in meals)
+                    {
+                        meal.Ingredients = db.Ingredients
+                            .Where(x => x.Mealingredients.Any(y => y.MealId == meal.Id))
+                            .Select(x => new Ingredient(x))
+                            .ToList();
+                    }
                 }
             }
             catch (Exception ex)
@@ -56,6 +65,16 @@ namespace Mennu.Services
                 return false;
             }
             return false;
+        }
+        public static bool SaveMeal(Meal meal)
+        {
+            return SaveMeal(new Meals
+            {
+                Id = meal.Id,
+                Instructions = meal.Instructions,
+                Name = meal.Name,
+                Servings = meal.Servings
+            });
         }
     }
 }
