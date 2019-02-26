@@ -63,3 +63,12 @@ typings/
 #### Mennu specific stuff
 
 build
+dist
+.vs
+/bin/
+
+.vscode
+/core/Mennu/Mennu/obj
+/.vs/Mennu/v15/Server/sqlite3
+/Mennu/bin/
+/Mennu/obj
