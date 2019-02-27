@@ -10,7 +10,7 @@ import MealPlan from './models/mealplan.js'
 import Ingredient from './models/ingredient.js'
 import { get, post } from './tools.js'
 import MealDay from "./models/mealday.js";
- 
+
 let mainApp = new Vue({
     el: '#meal-planner',
     data: {
@@ -26,7 +26,6 @@ let mainApp = new Vue({
     methods: {
         loadMeals: function (): void {
             var self = this;
-            console.log('loading meals');
             get('/api/GetAllMeals', function (response) {
                 self.$data.suggestions = response.map(function (r) {
                     return new Meal(r);
@@ -103,7 +102,6 @@ let mainApp = new Vue({
         },
         buildWeek: function (): void {
             var self = this;
-            console.log(self.$data.mealPlan);
             self.$data.mealPlan.days.push(
                 new MealDay("Sunday"),
                 new MealDay("Monday"),
@@ -137,7 +135,43 @@ let mainApp = new Vue({
                 }
             }
             return null;
+        },
+        ingredients: function (): Array<Ingredient> {
+            var self = this;
+            var allIngredients = new Array<Ingredient>();
+
+            var meals = self.$data.mealPlan.days.reduce((a, b) => {
+                a.push(...b.meals.reduce((c, d) => {
+                    c.push(d);
+                    return c
+                }, []);
+                return a;
+            }, []);
+
+            var ingredients = meals.reduce((acc, meal) => {
+                acc.push(...meal.ingredients)
+                return acc;
+            }, [])
+            console.log("Ingredients", ingredients)
+
+            allIngredients = ingredients.reduce((acc, ing) => {
+                let index = acc.findIndex(a => a.id == ing.id);
+
+                if (index >= 0) {
+                    acc[index].amount += ing.amount;
+                    //console.log("Existing ing", ingredients[index])
+                }
+                else {
+                    acc.push(new Ingredient(JSON.parse(JSON.stringify(ing))));
+                }
+
+                return acc;
+            }, [])
+
+            console.log(allIngredients);
+            return allIngredients;
         }
+
     },
     created: function (): void {
         this.loadMeals();

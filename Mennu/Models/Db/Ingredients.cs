@@ -13,6 +13,7 @@ namespace Mennu.Models.Db
         public string Id { get; set; }
         public string Name { get; set; }
         public int? Measurement { get; set; }
+        public int? Amount { get; set; }
 
         public virtual ICollection<Mealingredients> Mealingredients { get; set; }
     }

@@ -1,3 +1,5 @@
+import Ingredient from "./ingredient";
+
 export default class Meal {
     /** 
     * Creates a new Meal
@@ -20,7 +22,7 @@ export default class Meal {
         this.name = data.name;
         this.isActive = data.isActive;
         this.instructions = data.instructions;
-        this.ingredients = data.ingredients;
+        this.ingredients = data.ingredients.map(a=> new Ingredient(a));
         this.servings = data.servings;
     }
 }

@@ -44,13 +44,22 @@
         </div>
     </div>
     <div class="main">
-        <div class="meal-plan" v-if="visiblePage === views.main">
-            <div v-for="day in mealPlan.days">
-                {{ day.dayOfWeek }}
+        <div v-if="visiblePage === views.main">
+            <div class="meal-plan">
+                <div v-for="day in mealPlan.days">
+                    {{ day.dayOfWeek }}
 
-                <div class="meal" v-for="meal in day.meals" v-on:click="mealClick(meal)" v-on:drop="mealDrop($event, meal)"
-                     v-on:dragover="$event.preventDefault()">
-                    {{ meal.name }}
+                    <div class="meal" v-for="meal in day.meals" v-on:click="mealClick(meal)" v-on:drop="mealDrop($event, meal)"
+                         v-on:dragover="$event.preventDefault()">
+                        {{ meal.name }}
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h2>Shopping List</h2>
+                <div v-for="ingredient in ingredients">
+                    <span>{{ ingredient.name }}</span> x {{ ingredient.amount }}
                 </div>
             </div>
         </div>
@@ -70,8 +79,23 @@
                 <label>Ingredients</label>
 
                 <template v-for="ingredient in newMeal.ingredients">
-                    <input v-model="ingredient.name">
-                    <input v-model="ingredient.amount">
+                    <input placeholder="Name" v-model="ingredient.name">
+                    <input placeholder="Amount" v-model="ingredient.amount">
+                    <select v-model="ingredient.measurement">
+                        <optgroup label="Weight">
+                            <option>lb</option>
+                            <option>Oz</option>
+                        </optgroup>
+                        <optgroup label="Volume">
+                            <option>Liter</option>
+                            <option>Fl Oz</option>
+                            <option>Cup</option>
+                        </optgroup>
+                        <optgroup label="Other">
+                            <option>Package</option>
+                            <option>Carton</option>
+                        </optgroup>
+                    </select>
 
                 </template>
                 <button v-on:click="addIngredient"> +</button>

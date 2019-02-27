@@ -11,10 +11,12 @@ namespace Mennu.Models
             this.Id = ingredient.Id;
             this.Name = ingredient.Name;
             this.Measurement = ingredient.Measurement;
+            this.Amount = ingredient.Amount;
         }
 
         public string Id { get; set; }
         public string Name { get; set; }
         public int? Measurement { get; set; }
+        public int? Amount { get; private set; }
     }
 }

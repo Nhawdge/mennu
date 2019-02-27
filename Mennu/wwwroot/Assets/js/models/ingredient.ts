@@ -1,4 +1,16 @@
 export default class Ingredient {
-    name: string = "test";
-    amount: number = 0;
+
+    constructor(data: any) {
+        if (data) {
+            this.id = data.id;
+            this.name = data.name;
+            this.amount = data.amount;
+            this.measurement = data.measurement;
+        }
+    }
+
+    id:string = ""
+    name: string = "";
+    amount: number = null;
+    measurement: number = null;
 }

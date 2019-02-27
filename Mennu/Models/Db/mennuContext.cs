@@ -43,6 +43,10 @@ namespace Mennu.Models.Db
                     .IsUnicode(false)
                     .ValueGeneratedNever();
 
+                entity.Property(e => e.Amount)
+                    .HasColumnName("amount")
+                    .HasColumnType("int(11)");
+
                 entity.Property(e => e.Measurement)
                     .HasColumnName("measurement")
                     .HasColumnType("int(11)");
